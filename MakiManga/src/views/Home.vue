@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import Carousel from '@/components/Carousel.vue';
 </script>
 
 <template>
@@ -8,9 +8,7 @@
         <img class="image1" src="../assets/img/BleuGirl.png" alt="">
         <img class="image2" src="../assets/img/Miku.png" alt="">
         <div class="container-carousel">
-            <div class="carousel">
-
-            </div>
+            <Carousel />
         </div>
     </div>
 </div>
@@ -20,9 +18,8 @@
 
 .main-container {
     .background {
-        background-image: url("../assets/img/Background.jpg");
+        background-image: url("../assets/img/Fond2.jpg");
         background-size: cover;
-        background-position-y: bottom;
         height: 85vh;
         position: relative;
         display: flex;
@@ -46,6 +43,10 @@
             width: 1000px;
             background-color: #1C2942;
             border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }
