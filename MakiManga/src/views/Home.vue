@@ -3,7 +3,6 @@
 </script>
 
 <template>
-
 <div class="main-container">
     <div class="background">
         <img class="image1" src="../assets/img/BleuGirl.png" alt="">
