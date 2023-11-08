@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const MangaSchema = new Schema({
     nameFR: String,
     NameJP: String,
+    releaseDate: Date,
     image: String,
     description: String, 
 });
