@@ -8,7 +8,7 @@
             <button><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff;"></i></button>
             <div class="icons">
                 <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
-                <router-link to=""><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
+                <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
             </div>
         </nav>
     </header>
