@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, type Ref } from 'vue'
 import '@splidejs/vue-splide/css';
 import Splide from '@splidejs/splide';
 

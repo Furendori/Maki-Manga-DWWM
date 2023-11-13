@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import Carousel from '@/components/Carousel.vue';
-import { getAllProducts } from '../src/repositories/ProductRepository.js';
+import { ProductRepository } from '../repositories/ProductRepository';
+
+let repo: ProductRepository = new ProductRepository();
+repo.
 </script>
 
 <template>
