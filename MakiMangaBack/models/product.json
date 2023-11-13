@@ -1,0 +1,74 @@
+[
+    {
+        "name":"Raphtalia",
+        "image":"https://www.derivefigurine.com/123694/figurine-raphtalia-shiromuku.jpg",
+        "license":"The Rising of the Shield Hero",
+        "price":349.99
+    },
+    {
+        "name":"Koro-Sensei",
+        "image":"https://www.derivefigurine.com/93610/figurine-koro-sensei.jpg",
+        "license":"Assassination Classroom",
+        "price":139.99
+    },
+    {
+        "name":"Natsu Dragneel et Happy",
+        "image":"https://www.derivefigurine.com/108050/final-season-figurine-natsu-dragneel-happy-nendoroid.jpg",
+        "license":"Fairy Tail",
+        "price":69.90
+    },
+    {
+        "name":"LANCER/ERESHKIGAL",
+        "image":"https://www.derivefigurine.com/189733/grand-order-arcade-figurine-lancer-ereshkigal-luminasta.jpg",
+        "license":"Fate/Stay Night",
+        "price":26.90
+    },
+    {
+        "name":"Marin Kitagawa",
+        "image":"https://www.derivefigurine.com/135665/figurine-marin-kitagawa.jpg",
+        "license":"My Dress Up Darling",
+        "price":249.99
+    },
+    {
+        "name":"Shoyo Hinata",
+        "image":"https://www.derivefigurine.com/154979/figurine-shoyo-hinata-tenitol.jpg",
+        "license":"Haikyu!!",
+        "price":89.90
+    },
+    {
+        "name":"Kaori Miayazono",
+        "image":"https://www.derivefigurine.com/66286/figurine-kaori-miyazono-casual-dress-when-meeting-with-kousei.jpg",
+        "license":"Your Lie In April",
+        "price":189.99
+    },
+    {
+        "name": "Mai Sakurajima",
+        "image": "https://www.derivefigurine.com/65342/figurine-mai-sakurajima-water-gun-date.jpg",
+        "licence" : "Rascal Does Not Dream of a Bunny Girl Senpai",
+        "price" : 209.99
+    },
+    {
+        "name": "Taki Tachibana",
+        "image": "https://www.derivefigurine.com/544/figurine-taki-tachibana.jpg",
+        "licence" : "Your Name",
+        "price" : 93.99
+    },
+    {
+        "name": "Gen Asagiri",
+        "image": "https://www.derivefigurine.com/119684/figurine-gen-asagiri-nendoroid.jpg",
+        "licence" : "Dr. Stone",
+        "price" : 59.90
+    },
+    {
+        "name": "Izumi Miyamura",
+        "image": "https://www.derivefigurine.com/89737/figurine-izumi-miyamura-nendoroid.jpg",
+        "licence" : "Horimiya",
+        "price" : 64.99
+    },
+    {
+        "name": "Yuna",
+        "image": "https://www.derivefigurine.com/174838/punch-figurine-yuna-classique-special-set.jpg",
+        "licence" : "Kuma Kuma Kuma Bear",
+        "price" : 229.99
+    }
+]
