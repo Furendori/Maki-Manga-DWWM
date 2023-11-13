@@ -2,10 +2,12 @@
     <header>
         <router-link to="/"><img src="../assets/img/LOGO_MAKI_MANGA.png" alt=""></router-link>
         <nav>
-            <router-link to="#">LICENCES</router-link>
-            <router-link to="#">PRODUITS</router-link>
-            <router-link to="#">CONTACT</router-link>
-            <button><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff;"></i></button>
+            <div class="search">
+               <router-link to="/licenses">LICENCES</router-link>
+                <router-link to="#">PRODUITS</router-link>
+                <router-link to="/contact">CONTACT</router-link>
+                <button @click=""><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff;"></i></button> 
+            </div>
             <div class="icons">
                 <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
                 <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
