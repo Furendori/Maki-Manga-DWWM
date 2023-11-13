@@ -1,7 +1,6 @@
-
-export const request = async (path: string, method: string = "GET", body = null) => {
+export const request = async (path: string, method: string = "GET", body: object = {}) => {
     try {
-        let options = {method}; // {method: method}
+        let options: RequestInit = {method}; // {method: method}
         // Build body
         if(body != null) {
             options.body = JSON.stringify(body); //{method: method, body: body}
@@ -13,7 +12,7 @@ export const request = async (path: string, method: string = "GET", body = null)
             }; //{method: method, body: body, headers: {'Content-Type': 'application/json'}}
 
         }
-        let response = await fetch("http://localhost:5500" + path, options);
+        let response: Response = await fetch("http://localhost:5500" + path, options);
         return await response.json();
     } catch (e) {
         console.log(e);
