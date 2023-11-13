@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Button from '@/components/Button.vue';
 import { ref } from 'vue';
 
 const optionsObject = ref([
@@ -21,7 +22,8 @@ const subject = ref("")
   <div class="main-container">
     <h2>Contact</h2>
     <div class="container-form">
-      <form action="POST" @submit.prevent="submit">
+      <img src="../assets/img/mangagirl.png" alt="">
+      <form action="POST" action="/send_email">
         <label for="inputName">Name* :</label>
         <input v-model="name" type="text" id="inputName" name="name" required/>
 
@@ -41,7 +43,7 @@ const subject = ref("")
         <label for="textArea">Message* :</label>
         <textarea name="text" id="textArea" cols="80" rows="20"></textarea>
 
-        <input type="submit" value="Create">
+        <Button type="submit" value="send">Envoyer</Button>
       </form>
     </div>
   </div>
@@ -54,8 +56,11 @@ const subject = ref("")
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  font-family: 'Koulen', display;
+  color: #5FC2BA;
 
   h2 {
+    color: #1C2942;
     margin: 0;
   }
 
@@ -63,11 +68,36 @@ const subject = ref("")
     background-color: #1C2942;
     padding: 20px;
     border-radius: 15px;
+    position: relative;
+
+    img {
+      height: 300px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+
     form {
       display: flex;
       flex-direction: column;
 
       label, input, select {
+        border: none;
+        margin-top: 5px;
+        height: 26px;
+        transition: 0.2s
+      }
+
+      input:focus, select:focus {
+        outline-width: 0;
+        border: 3px solid #5FC2BA;
+      }
+
+      textArea:focus {
+        outline-color: #5FC2BA;
+      }
+
+      Button {
         margin-top: 5px;
       }
     }

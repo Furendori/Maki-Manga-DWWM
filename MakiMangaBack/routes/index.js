@@ -26,6 +26,10 @@ module.exports = server => {
         ProductController.create(req, res);
     });
 
+    server.post("/send_email", (req, res) => {
+        SendEmailController.create(req, res);
+    });
+
     server.delete("/users/:id", (req, res) => {
         UserController.delete(req, res);
     });

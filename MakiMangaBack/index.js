@@ -1,3 +1,5 @@
+const nodemailer = require("nodemailer");
+const nodeoutlook = require("nodejs-nodemailer-outlook");
 const express = require("express");
 const cors = require('cors');
 const server = express();
