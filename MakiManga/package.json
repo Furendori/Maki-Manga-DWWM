@@ -10,6 +10,8 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "esbuild": "^0.19.5",
+    "esbuild-wasm": "^0.19.5",
     "pinia": "^2.1.7",
     "sass": "^1.69.5",
     "vue": "^3.3.4",
