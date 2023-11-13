@@ -3,7 +3,7 @@ import Carousel from '@/components/Carousel.vue';
 import { ProductRepository } from '../repositories/ProductRepository';
 
 let repo: ProductRepository = new ProductRepository();
-repo.
+
 </script>
 
 <template>
