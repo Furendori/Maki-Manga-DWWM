@@ -63,6 +63,8 @@ body {
 .form-header {
   background-color: #1c2942;
   color: rgb(221, 220, 220);
+  border-top-left-radius: 70px;
+  border-top-right-radius: 70px;
 }
 
 .centered-container {
@@ -112,7 +114,7 @@ form {
   border-radius: 20px;
   width: 30%;
   margin-left: 23%;
-  margin-top: 6%;
+  margin-top: 4%;
 }
 
 .terms-check {
