@@ -27,6 +27,8 @@ const router = createRouter({
       path: '/licenses',
       name: 'licenses',
       component: () => import('../views/Licenses.vue')
+    },
+    {
       path: '/Search',
       name: 'search',
       component: () => import('../views/SearchView.vue')

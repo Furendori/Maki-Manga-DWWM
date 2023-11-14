@@ -1,37 +1,25 @@
 <template>
     <header>
         <router-link to="/"><img src="../assets/img/LOGO_MAKI_MANGA.png" alt=""></router-link>
+        
         <nav>
-            <div class="search">
-               <router-link to="/licenses">LICENCES</router-link>
-                <router-link to="#">PRODUITS</router-link>
-                <router-link to="/contact">CONTACT</router-link>
-                <button @click=""><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #ffffff;"></i></button> 
+            <router-link to="../Search">LICENCES</router-link>
+            <router-link to="#">PRODUITS</router-link>
+            <router-link to="#">CONTACT</router-link>
+    
+            <div id="research">
+            <form id="form-search" action="?">
+                <input type="text" id="search" name="search" placeholder="Saisir votre recherche">
+                <i class="fa-solid fa-magnifying-glass fa-lg" id="bt-search" style="color: #ffffff;"></i>
+                <i class="material-icons" id="bt-close">close</i>
+            </form>
             </div>
+    
             <div class="icons">
-                <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
-                <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
+            <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
+            <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
             </div>
         </nav>
-      <router-link to="/"><img src="../assets/img/LOGO_MAKI_MANGA.png" alt=""></router-link>
-      <nav>
-        <router-link to="../Search">LICENCES</router-link>
-        <router-link to="#">PRODUITS</router-link>
-        <router-link to="#">CONTACT</router-link>
-  
-        <div id="research">
-          <form id="form-search" action="?">
-            <input type="text" id="search" name="search" placeholder="Saisir votre recherche">
-            <i class="fa-solid fa-magnifying-glass fa-lg" id="bt-search" style="color: #ffffff;"></i>
-            <i class="material-icons" id="bt-close">close</i>
-          </form>
-        </div>
-  
-        <div class="icons">
-          <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
-          <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
-        </div>
-      </nav>
     </header>
   </template>
 
