@@ -115,7 +115,9 @@ onMounted(() => {
             justify-content: center;
         }
     }
-
+    p{
+        margin: 0;
+    }
     .container-news {
         .container-cards {
             display: flex;
@@ -125,17 +127,18 @@ onMounted(() => {
             .card {
                 width: 300px;
                 height: 500px;
+
                 .container-img {
-                    width: 100%;
-                    height: 300px;
+                width: 100%;
+                height: 300px;
+
                     img {
                         height: 300px;
                         width: 200px;
                         object-fit: cover;
                     }
-                }
-                
-            }
+                }  
+            }   
         }
     }
     .parallax-effect-1 {
