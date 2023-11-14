@@ -23,7 +23,7 @@ const subject = ref("")
     <h2>Contact</h2>
     <div class="container-form">
       <img src="../assets/img/mangagirl.png" alt="">
-      <form action="POST" action="/send_email">
+      <form action="POST" >
         <label for="inputName">Name* :</label>
         <input v-model="name" type="text" id="inputName" name="name" required/>
 

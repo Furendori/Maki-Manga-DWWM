@@ -1,17 +1,20 @@
-import { request } from "./BaseRepository"
+import { BaseRepository } from "./BaseRepository"
 
-export const getAllUsers = async () => {
-    return await request(`/users`);
-}
+export class UserRepository extends BaseRepository {
 
-export const getUser = async (id) => {
-    return await request(`/user/${id}`);
-}
+    getAllUsers = async () => {
+        return await this.request(`/users`);
+    }
 
-export const createUser = async (body) => {
-    return await request(`/users`, 'POST', body);
-}
+    getUser = async (id: number) => {
+        return await this.request(`/user/${id}`);
+    }
 
-export const deleteUser = async (id) => {
-    return await request(`/users/${id}`, 'DELETE');
+    createUser = async (body?: {}) => {
+        return await this.request(`/users`, 'POST', body);
+    }
+
+    deleteUser = async (id: number) => {
+        return await this.request(`/users/${id}`, 'DELETE');
+    }
 }

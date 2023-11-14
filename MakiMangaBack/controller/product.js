@@ -13,4 +13,33 @@ module.exports = {
             res.send(product);
         });
     },
+
+    create(req, res) {
+        const product = new ProductModel({...req.body});
+        product.save().then(() => {
+            res.send({
+                response: `Création du produit ${product.name} effectué avec succès`
+            });
+        }).catch((e) => console.log(e.toString()));
+    },
+
+    update(req, res) {
+        const id = req.body._id;
+        if(id) {
+            ProductModel.findByIdAndUpdate(id, req.body).then(product => {
+                res.send(`Mise à jour du produit ${product.name}`)
+            });
+        } else {
+            res.send({ result: "Un id est nécessaire pour mettre à jour le produit"})
+        }
+    },
+
+    delete(req, res) {
+        const id = req.params.id;
+        ProductModel.findByIdAndRemove(id).then(product => {
+            res.send({
+                response: `Suppression du produit ${product.name} a bien été supprimé`
+            });
+        });
+    }
 }
