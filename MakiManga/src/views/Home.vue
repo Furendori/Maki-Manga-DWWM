@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import Carousel from '@/components/Carousel.vue';
-import { ProductRepository } from '../repositories/ProductRepository';
+import { ref, onMounted } from 'vue'
+import { ProductRepository } from '../repositories/ProductRepository'
+import Carousel from '@/components/Carousel.vue'
+import Button from '../components/Button.vue'
 
-let repo: ProductRepository = new ProductRepository();
+const products = ref([])
+const isLoading = ref(true)
 
+const repo: ProductRepository = new ProductRepository()
+ 
+
+const getProducts = async () => {
+    products.value = await repo.getAllProducts()
+    isLoading.value = false;
+}
+
+onMounted(() => {
+    getProducts();
+ });
 </script>
 
 <template>
@@ -17,8 +31,16 @@ let repo: ProductRepository = new ProductRepository();
     </div>
 
     <div class="container-news">
-        <div class="card">
-
+        <h3>Nouveautés</h3>
+        <div class="container-cards">
+            <div class="card" v-for="product in products">
+                <div class="container-img">
+                    <router-link to="#"><img :src="product['image']" alt=""></router-link>
+                </div>
+                <p>{{ product['name'] }}</p>
+                <p>{{ product['price'] }}€</p>
+                <Button>Ajouter au panier</Button>
+            </div> 
         </div>
     </div>
 
@@ -34,10 +56,23 @@ let repo: ProductRepository = new ProductRepository();
         </div>
     </div>
 
-    
-    
+    <div class="container-news">
+        <h3>Meilleures ventes</h3>
+        <div class="container-cards">
+            <div class="card" v-for="product in products">
+                <div class="container-img">
+                    <router-link to="#"><img :src="product['image']" alt=""></router-link>
+                </div>
+                <p>{{ product['name'] }}</p>
+                <p>{{ product['price'] }}€</p>
+                <Button>Ajouter au panier</Button>
+            </div> 
+        </div>
+    </div>
 
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem ducimus nesciunt, id iste, ab dolore nam in aspernatur explicabo, error quod aperiam excepturi velit fugiat! Facilis numquam saepe rerum dolore!</p>
+    <div class="container-partners">
+
+    </div>
 </div>
 </template>
 
@@ -78,6 +113,29 @@ let repo: ProductRepository = new ProductRepository();
             justify-content: center;
         }
     }
+
+    .container-news {
+        .container-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            .card {
+                width: 300px;
+                height: 500px;
+                .container-img {
+                    width: 100%;
+                    height: 300px;
+                    img {
+                        height: 300px;
+                        width: 200px;
+                        object-fit: cover;
+                    }
+                }
+                
+            }
+        }
+    }
     .parallax-effect-1 {
         background-image: url("../assets/img/GirlFlower.jpg");
         z-index: 1;
@@ -86,7 +144,6 @@ let repo: ProductRepository = new ProductRepository();
         background-size: cover; 
         background-position: center;
         background-repeat: no-repeat;
-        background-position-y: 400px;
     }
 
     .container-line2 {

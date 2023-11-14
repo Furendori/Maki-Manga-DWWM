@@ -3,9 +3,9 @@
         <router-link to="/"><img src="../assets/img/LOGO_MAKI_MANGA.png" alt=""></router-link>
         
         <nav>
-            <router-link to="../Search">LICENCES</router-link>
+            <router-link to="/Search">LICENCES</router-link>
             <router-link to="#">PRODUITS</router-link>
-            <router-link to="#">CONTACT</router-link>
+            <router-link to="/contact">CONTACT</router-link>
     
             <div id="research">
             <form id="form-search" action="?">
