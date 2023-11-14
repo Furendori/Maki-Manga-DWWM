@@ -1,3 +1,21 @@
 @import 'variables';
 @import 'reset';
 @import url(https://fonts.bunny.net/css?family=koulen:400);
+
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: 'Koulen', cursive;
+    text-align: center;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
