@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { ProductRepository } from '../repositories/ProductRepository'
 import Carousel from '@/components/Carousel.vue'
 import Button from '../components/Button.vue'
+import Partners from '@/components/Partners.vue';
 
 const products = ref([])
 const isLoading = ref(true)
@@ -63,16 +64,17 @@ onMounted(() => {
                 <div class="container-img">
                     <router-link to="#"><img :src="product['image']" alt=""></router-link>
                 </div>
-                <p>{{ product['name'] }}</p>
-                <p>{{ product['price'] }}€</p>
-                <Button>Ajouter au panier</Button>
+                <div class="product-details">
+                    <p>{{ product['name'] }}</p>
+                    <p>{{ product['price'] }}€</p>
+                    <Button>Ajouter au panier</Button>
+                </div>
+                
             </div> 
         </div>
     </div>
 
-    <div class="container-partners">
-
-    </div>
+    <Partners />
 </div>
 </template>
 
