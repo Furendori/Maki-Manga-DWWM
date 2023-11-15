@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  
+</script>
 
 <template>
     <img class="remi" src="../assets/img/latest.png" alt="">
@@ -58,6 +60,7 @@ body {
 
 .inscrip {
   top: 5%;
+  margin: 0;
 }
 
 .form-header {
@@ -74,9 +77,10 @@ body {
 .centered-form {
   display: inline-block;
   text-align: left;
-  border: 1px solid #1c2942;
+  border: 2px solid #1c2942;
   border-radius: 70px;
   width: 50%;
+  margin-bottom: 50px;
 }
 
 .form-content {
@@ -110,7 +114,6 @@ body {
 }
 
 form {
-  border: 1px solid black;
   border-radius: 20px;
   width: 30%;
   margin-left: 23%;
@@ -134,7 +137,7 @@ form {
   height: 400px;
   width: 250px;
   position: absolute;
-  margin-top: 13%;
+  top: 35%;
   margin-left: 2%;
 }
 
@@ -143,7 +146,26 @@ form {
   width: 400px;
   position: absolute;
   right: 0;
-  margin-top: 13%;
+  top: 35%;
   margin-right: 1%;
+}
+
+@media screen and (max-width: 470px) {
+  .remi {
+    /* height: 200px;
+    width: 120px; */
+    display: none;
+  }
+
+  .maomao {
+    /* height: 200px;
+    width: 200px; */
+    display: none;
+  }
+
+  .centered-form {
+    width: 90%;
+    margin-left: 20px;
+  }
 }
 </style>
