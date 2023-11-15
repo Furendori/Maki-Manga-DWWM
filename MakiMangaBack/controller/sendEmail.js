@@ -5,10 +5,12 @@ module.export = {
         const email = new SendEmailModel({...req.body});
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: "smtp.fowardemail.net",
+            port: 465,
+            secure: true,
             auth: {
-                user: "",
-                pass: ""
+                user: "christa.leannon@ethereal.email",
+                pass: "FRzmDgS3VS4WDsEctr"
             }
         })
     }
