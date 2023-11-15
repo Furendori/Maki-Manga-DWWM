@@ -19,7 +19,7 @@ export default {
     performSearch(productType, genre, searchTerm) {
       console.log("Recherche pour", productType, genre, searchTerm);
 
-      return ["resultat 1","...."];
+      return ["y'a rien chacal"];
     }
   }
 };
@@ -33,29 +33,29 @@ export default {
     </div>
 
     <div class="search-bar">
-      <label for="product-type">Type de Produit:</label>
-      <select id="product-type">
-        <option value="Figurines">Figurines</option>
-        <option value="Décorations">Décorations</option>
-        <option value="Goodies">Goodies</option>
-      </select>
+    <label for="product-type">Type de Produit:</label>
+    <select id="product-type" v-model="selectedProductType">
+      <option value="Figurines">Figurines</option>
+      <option value="Décorations">Décorations</option>
+      <option value="Goodies">Goodies</option>
+    </select>
 
-      <label for="genres">Genres:</label>
-      <select id="genres">
-        <option value="action">Action</option>
-        <option value="drama">Drame</option>
-        <option value="comedy">Comédie</option>
-      </select>
+    <label for="genres">Genres:</label>
+    <select id="genres" v-model="selectedGenre">
+      <option value="action">Action</option>
+      <option value="drama">Drame</option>
+      <option value="comedy">Comédie</option>
+    </select>
 
-      <input type="text" placeholder="Recherche...">
-      <button>Rechercher</button>
+    <input type="text" placeholder="Recherche..." v-model="searchTerm">
+    <button @click="search">Rechercher</button>
 
-      <div class="results">
-        <ul>
-          <li v-for="result in searchResults">{{ result }}</li>
-        </ul>
-      </div>
+    <div class="results">
+      <ul>
+        <li v-for="result in searchResults">{{ result }}</li>
+      </ul>
     </div>
+  </div>
 
     <div class="content">
       <p>Veuillez indiquer ce que vous recherchez...</p>
@@ -152,7 +152,7 @@ export default {
 
   @media screen and (max-width: 768px) {
     .search-bar {
-      flex-direction: column; /* Empile les éléments sur petit écran */
+      flex-direction: column;
     }
 
     select, input, button {

@@ -1,25 +1,76 @@
+<script>
+
+// animation de la barre de recherche
+function setSearch(oEvent){
+  console.log(oEvent); 
+  oEvent.preventDefault();
+  var sType = oEvent.type,
+      sClass =  "search",
+      oSearch = oEvent.currentTarget,
+      oForm  =  oSearch.form; 
+  if((sType == 'focus' || sType == 'click') && !oForm.classList.contains(sClass)){
+    oForm.classList.add(sClass)
+  }else if(sType == 'blur' && oSearch.value.trim() == ''){
+    oForm.classList.remove(sClass)
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  var oInput = document.forms["form-search"]["search"];
+  oInput.addEventListener('focus',setSearch)
+  oInput.addEventListener('blur',setSearch);
+  
+  document.getElementById("bt-search").addEventListener('click', function(oEvent){
+    oEvent.preventDefault();oInput.focus() ;
+  });
+});
+
+// menu burger
+export default {
+  data() {
+    return {
+      isMenuOpen: false,
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+  },
+};
+</script>
+
+
 <template>
     <header>
-        <router-link to="/"><img src="../assets/img/LOGO_MAKI_MANGA.png" alt=""></router-link>
-        
-        <nav>
-            <router-link to="/Search">LICENCES</router-link>
-            <router-link to="#">PRODUITS</router-link>
-            <router-link to="/contact">CONTACT</router-link>
-    
-            <div id="research">
-            <form id="form-search" action="?">
-                <input type="text" id="search" name="search" placeholder="Saisir votre recherche">
-                <i class="fa-solid fa-magnifying-glass fa-lg" id="bt-search" style="color: #ffffff;"></i>
-                <i class="material-icons" id="bt-close">close</i>
-            </form>
-            </div>
-    
-            <div class="icons">
-            <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
-            <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link> 
-            </div>
-        </nav>
+      <router-link to="/">
+        <img src="../assets/img/LOGO_MAKI_MANGA.png" alt="">
+      </router-link>
+  
+      <div class="hamburger" @click="toggleMenu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+  
+      <nav :class="{ 'show-menu': isMenuOpen }">
+        <router-link to="../Search">LICENCES</router-link>
+        <router-link to="#">PRODUITS</router-link>
+        <router-link to="#">CONTACT</router-link>
+  
+        <div id="research">
+          <form id="form-search" action="?">
+            <input type="text" id="search" name="search" placeholder="Saisir votre recherche">
+            <i class="fa-solid fa-magnifying-glass fa-lg" id="bt-search" style="color: #ffffff;"></i>
+            <i class="material-icons" id="bt-close">close</i>
+          </form>
+        </div>
+  
+        <div class="icons">
+          <router-link to=""><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link>
+          <router-link to="./Login"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link>
+        </div>
+      </nav>
     </header>
   </template>
 
@@ -30,7 +81,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    width: 100%;
+    margin: 0;
+    padding: 0; 
     img {
         height: 150px;
         width: 150px;
@@ -42,16 +95,23 @@ header {
         margin-right: 20px;
         display: flex;
         align-items: center;
+        max-width: 100%;
 
         a {
             color: white;
             margin: 10px;
+            text-align: center;
+            text-decoration: none;
         }
         .icons {
             margin: 5px;
-            margin-left: 150px;
+            margin-left: 90px;
         }
     }
+}
+
+div.icons {
+    display: flex;
 }
 
 #form-search {
@@ -115,14 +175,16 @@ header {
     cursor: pointer;
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
 
     header {
         flex-direction: column;
+        width: 100%;
     }
 
     nav {
         margin-top: 20px;
+        width: 100%;
     }
 
     .icons {
@@ -135,6 +197,7 @@ header {
 
     #bt-close, #form-search.search #bt-search {
         display: none;
+        width: 150px;
     }
 
     #form-search.search {
@@ -143,39 +206,38 @@ header {
     }  
 }
 
-</style>
-
-
-
-
-<script>
-
-// animation de la barre de recherche
-function setSearch(oEvent){
-  console.log(oEvent); 
-  oEvent.preventDefault();
-  var sType = oEvent.type,
-      sClass =  "search",
-      oSearch = oEvent.currentTarget,
-      oForm  =  oSearch.form; 
-  if((sType == 'focus' || sType == 'click') && !oForm.classList.contains(sClass)){
-    oForm.classList.add(sClass)
-  }else if(sType == 'blur' && oSearch.value.trim() == ''){
-    oForm.classList.remove(sClass)
-  }
+.hamburger {
+  display: none;
+  cursor: pointer;
 }
 
+.bar {
+  width: 40px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.4s;
+}
+.show-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-document.addEventListener('DOMContentLoaded',function(){
-  var oInput = document.forms["form-search"]["search"];
-  oInput.addEventListener('focus',setSearch)
-  oInput.addEventListener('blur',setSearch);
-  
-  document.getElementById("bt-search").addEventListener('click', function(oEvent){
-    oEvent.preventDefault();oInput.focus() ;
-  });
-  
+@media screen and (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
 
-});
+  nav {
+    display: flex;
+  }
 
-</script>
+  nav.show-menu {
+    display: flex;
+  }
+  div.icons {
+    display: flex;
+  }
+}
+</style>
