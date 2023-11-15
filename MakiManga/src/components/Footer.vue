@@ -1,13 +1,12 @@
 <template>
   <footer>
-    <hr />
     <div class="footer-content">
       <div class="account">
         <p>Votre compte</p>
-        <a href="#">Informations personnelles</a>
+        <a href="/myaccount">Informations personnelles</a>
         <a href="#">Panier</a>
-        <a href="#">Inscription</a>
-        <a href="#">Connexion</a>
+        <a href="/register">Inscription</a>
+        <a href="/login">Connexion</a>
       </div>
 
       <div class="socials-content">
@@ -42,10 +41,6 @@
 footer {
   background-color: #1c2942;
   color: white;
-}
-
-hr {
-  margin-top: 5%;
 }
 
 p {
