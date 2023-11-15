@@ -23,7 +23,6 @@ const sendEmail = {
   from: email.value,
   subject: subject.value,
   text: message.value,
-
 }
 </script>
 
