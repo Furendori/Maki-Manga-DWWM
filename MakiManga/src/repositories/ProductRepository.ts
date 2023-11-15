@@ -4,8 +4,12 @@ export class ProductRepository extends BaseRepository {
     getAllProducts = async () => {
         return await this.request(`/products`);
     }
+
+    getFiveProducts = async (limit: number = 5) => {
+        return await this.request(`/products?limit=${limit}`);
+    }
     
-    getProduct = async (id: number) => {
+    getProduct = async (id: string) => {
         return await this.request(`/product/${id}`);
     }
     

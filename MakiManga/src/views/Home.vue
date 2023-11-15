@@ -12,7 +12,7 @@ const repo: ProductRepository = new ProductRepository()
  
 
 const getProducts = async () => {
-    products.value = await repo.getAllProducts()
+    products.value = await repo.getFiveProducts()
     isLoading.value = false;
 }
 
@@ -36,7 +36,7 @@ onMounted(() => {
         <div class="container-cards">
             <div class="card" v-for="product in products">
                 <div class="container-img">
-                    <router-link to="#"><img :src="product['image']" alt=""></router-link>
+                    <router-link :to="`/products/${product['id']}`"><img :src="product['image']" alt=""></router-link>
                 </div>
                 <p>{{ product['name'] }}</p>
                 <p>{{ product['price'] }}€</p>

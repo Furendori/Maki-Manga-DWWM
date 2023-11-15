@@ -11,11 +11,20 @@ const optionsObject = ref([
     name: "Problème avec un produit - SAV (Service après vente)"
   }, {
     name: "Autres"
-  }])
+  }]);
+
 const name = ref("")
 const email = ref("")
 const objectSelect = ref("")
 const subject = ref("")
+const message = ref("")
+
+const sendEmail = {
+  from: email.value,
+  subject: subject.value,
+  text: message.value,
+
+}
 </script>
 
 <template>
@@ -41,7 +50,7 @@ const subject = ref("")
         <input v-model="subject" type="text" id="inputSubject" name="subject" required>
 
         <label for="textArea">Message* :</label>
-        <textarea name="text" id="textArea" cols="80" rows="20"></textarea>
+        <textarea v-model="message" name="text" id="textArea" cols="80" rows="20"></textarea>
 
         <Button type="submit" value="send">Envoyer</Button>
       </form>

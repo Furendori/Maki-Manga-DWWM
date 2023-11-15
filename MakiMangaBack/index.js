@@ -1,17 +1,17 @@
 const nodemailer = require("nodemailer");
-const nodeoutlook = require("nodejs-nodemailer-outlook");
 const express = require("express");
 const cors = require('cors');
-const server = express();
 const mongoose = require("mongoose");
 const routes = require("./routes/index");
 
+const server = express();
 const corsOptions = {
     origin: "http://localhost:5173"
 };
 
 server.use(express.json());
 server.use(cors(corsOptions));
+server.use(bodyParser.json());
 
 server.listen(5500, () => {
     console.log("Serveur lancé");

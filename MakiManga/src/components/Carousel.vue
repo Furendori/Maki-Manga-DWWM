@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, defineComponent, type Ref } from 'vue'
+import { ref, onMounted } from 'vue';
 import '@splidejs/vue-splide/css';
 import Splide from '@splidejs/splide';
-
+ 
+// const splide = new Splide('.splide');
 
 const products = ref([
     {
@@ -17,26 +18,26 @@ const products = ref([
     {
         image: "https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg"
     },
-])
+]);
+
+// onMounted(() => {
+  
+// })
 
 </script>
 
 <template>
-<div class="splide">
-  <div class="splide__autoplay">
- 		<button class="splide__play">Play</button>
- 		<button class="splide__pause">Pause</button>
-  </div>
-
-  <button class="splide__toggle" type="button">
- 	  <span class="splide__toggle__play">Play</span>
- 	  <span class="splide__toggle__pause">Pause</span>
-  </button>
-</div>
+<!-- <Splide :options="{ rewind: true }" aria-label="My Favorite Images">
+    <SplideSlide>
+      <img src="image1.jpg" alt="Sample 1">
+    </SplideSlide>
+    <SplideSlide>
+      <img src="image2.jpg" alt="Sample 2">
+    </SplideSlide>
+  </Splide> -->
 </template>
 
 <style scoped lang="scss">
-
 .swiper {
   width: 100%;
   height: 100%;
