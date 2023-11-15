@@ -1,51 +1,74 @@
 <script setup lang="ts">
-  
+import { ref } from "vue";
+import router from "../router/index";
+import { UserRepository } from '../repositories/UserRepository';
+
+let userFirstName = ref("");
+let userLastName = ref("");
+let userEmail = ref("");
+let userPassword = ref("");
+let userPhone = ref(0);
+let sent = ref();
+
+let registerUserData = async () => {
+  try {
+    const userData = {
+      firstName: userFirstName.value,
+      lastName: userLastName.value,
+      password: userPassword.value,
+      phone: userPhone.value,
+      email: userEmail.value,
+    };
+
+    const UserRepository = new UserRepository()
+
+    router.push({ path: '/' })
+    
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de la requête", error);
+  }
+};
 </script>
 
 <template>
-    <img class="remi" src="../assets/img/latest.png" alt="">
-    <form action="" class="centered-form">
-      <div class="form-content">
-        <div class="form-header">
-          <h2 class="inscrip">Inscription</h2>
-          <p>(Les champs marqués avec * sont obligatoires)</p>
-        </div>
-
-        <div class="form-info">
-          <label for="firstNameInput">Prénom : *</label>
-          <input type="text" name="firstName" id="firstNameInput" />
-
-          <label for="lastNameInput">Nom : *</label>
-          <input type="text" name="lastName" id="lastNameInput" />
-
-          <label for="emailInput">Email : *</label>
-          <input type="email" name="email" id="emailInput" />
-
-          <label for="passwordInput">Mot de passe : *</label>
-          <input type="password" name="password" id="passwordInput" />
-
-          <label for="passwordConfirmInput"
-            >Confirmation du mot de passe : *</label
-          >
-          <input
-            type="password"
-            name="passwordConfirm"
-            id="passwordConfirmInput"
-          />
-
-          <label for="telInput">Numéro de téléphone :</label>
-          <input type="tel" name="phoneNumber" id="telInput" />
-
-          <input type="checkbox" name="termsAgree" id="termsConditions" />
-          <label for="termsConditions" class="terms-check"
-            >J'ai lu et j'accepte les termes et conditions</label
-          >
-
-          <input class="submit-btn" type="submit" value="Envoyer" />
-        </div>
+  <img class="remi" src="../assets/img/latest.png" alt="" />
+  <p v-show="sent && sent != ''">{{ sent ? "Données envoyées avec succès" : "Problème" }}</p>
+  <form action="" class="centered-form" @submit.prevent="registerUserData">
+    <div class="form-content">
+      <div class="form-header">
+        <h2 class="inscrip">Inscription</h2>
+        <p>(Les champs marqués avec * sont obligatoires)</p>
       </div>
-    </form>
-    <img class="maomao" src="../assets/img/character.png" alt="">
+
+      <div class="form-info">
+        <label for="firstName">Prénom : *</label>
+        <input type="text" id="firstName" v-model="userFirstName" />
+
+        <label for="lastName">Nom : *</label>
+        <input type="text" id="lastName" v-model="userLastName" />
+
+        <label for="email">Email : *</label>
+        <input type="email" id="email" v-model="userEmail" />
+
+        <label for="password">Mot de passe : *</label>
+        <input type="password" id="password" v-model="userPassword" />
+
+        <label for="passwordConfirm">Confirmation du mot de passe : *</label>
+        <input type="password" id="passwordConfirm" />
+
+        <label for="phone">Numéro de téléphone :</label>
+        <input type="tel" id="phone" v-model="userPhone" />
+
+        <input type="checkbox" name="termsAgree" id="termsConditions" />
+        <label for="termsConditions" class="terms-check"
+          >J'ai lu et j'accepte les termes et conditions</label
+        >
+
+        <input class="submit-btn" type="submit" value="Envoyer" />
+      </div>
+    </div>
+  </form>
+  <img class="maomao" src="../assets/img/character.png" alt="" />
 </template>
 
 <style scoped>
