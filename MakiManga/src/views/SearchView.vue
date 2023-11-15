@@ -25,6 +25,8 @@ export default {
 };
 </script>
 
+
+
 <template>
   <div class="search-container">
     <div class="search">

@@ -173,6 +173,7 @@ div.login-container {
   overflow: hidden;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   position: relative;
+  z-index: 1;
 }
 
 .cloud {
