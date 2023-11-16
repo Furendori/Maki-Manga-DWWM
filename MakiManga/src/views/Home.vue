@@ -4,6 +4,7 @@ import { ProductRepository } from '../repositories/ProductRepository'
 import Carousel from '@/components/Carousel.vue'
 import Button from '../components/Button.vue'
 import Partners from '@/components/Partners.vue';
+import ProductCard from '@/components/ProductCard.vue';
 
 const products = ref([])
 const isLoading = ref(true)
@@ -36,7 +37,9 @@ onMounted(() => {
         <div class="container-cards">
             <div class="card" v-for="product in products">
                 <div class="container-img">
-                    <router-link :to="`/products/${product['id']}`"><img :src="product['image']" alt=""></router-link>
+                    <router-link :to="`/products/${product['id']}`">
+                        <img :src="product['image']" alt="">
+                    </router-link>
                 </div>
                 <p>{{ product['name'] }}</p>
                 <p>{{ product['price'] }}€</p>
@@ -60,7 +63,7 @@ onMounted(() => {
     <div class="container-news">
         <h3>Meilleures ventes</h3>
         <div class="container-cards">
-            <div class="card" v-for="product in products">
+            <!-- <div class="card" v-for="product in products">
                 <div class="container-img">
                     <router-link to="#"><img :src="product['image']" alt=""></router-link>
                 </div>
@@ -69,8 +72,8 @@ onMounted(() => {
                     <p>{{ product['price'] }}€</p>
                     <Button>Ajouter au panier</Button>
                 </div>
-                
-            </div> 
+            </div>  -->
+            <ProductCard :product="product" v-for="product in products" :key="product['id']"></ProductCard>
         </div>
     </div>
 
@@ -117,30 +120,12 @@ onMounted(() => {
             justify-content: center;
         }
     }
-    p{
-        margin: 0;
-    }
     .container-news {
         .container-cards {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            .card {
-                width: 300px;
-                height: 500px;
-
-                .container-img {
-                width: 100%;
-                height: 300px;
-
-                    img {
-                        height: 300px;
-                        width: 200px;
-                        object-fit: cover;
-                    }
-                }  
-            }   
         }
     }
     .parallax-effect-1 {
