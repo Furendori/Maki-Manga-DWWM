@@ -20,10 +20,7 @@ let registerUserData = async () => {
       password: userPassword.value,
       phone: userPhone.value,
       email: userEmail.value,
-    };
-
-    const repo: UserRepository = new UserRepository()
-    
+    });
 
     router.push({ path: '/' })
     
