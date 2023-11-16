@@ -3,6 +3,8 @@ import { ref } from "vue";
 import router from "../router/index";
 import { UserRepository } from '../repositories/UserRepository';
 
+const repo: UserRepository = new UserRepository();
+
 let userFirstName = ref("");
 let userLastName = ref("");
 let userEmail = ref("");
@@ -12,16 +14,14 @@ let sent = ref();
 
 let registerUserData = async () => {
   try {
-    const userData = {
+     await repo.createUser({
       firstName: userFirstName.value,
       lastName: userLastName.value,
       password: userPassword.value,
       phone: userPhone.value,
       email: userEmail.value,
-    };
-
-    const UserRepository = new UserRepository()
-
+     });
+     
     router.push({ path: '/' })
     
   } catch (error) {

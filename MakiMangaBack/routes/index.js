@@ -1,5 +1,7 @@
 const UserController = require("../controller/user");
 const ProductController = require("../controller/product");
+const SendEmailController = require("../controller/sendEmail");
+
 module.exports = server => {
     
     server.get("/users", (req, res) => {

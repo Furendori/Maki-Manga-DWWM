@@ -13,4 +13,14 @@ module.exports = {
             res.send(user);
         });
     },
+
+    create(req, res) {
+        const user = new UserModel({...req.body});
+
+        user.save().then(() => {
+            res.send({
+                response: `Création du compte ${user.firstName} créé avec succès`
+            });
+        }).catch((error) => console.log(error.toString()));
+    },
 }
