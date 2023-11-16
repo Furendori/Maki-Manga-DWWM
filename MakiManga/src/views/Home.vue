@@ -12,7 +12,7 @@ const repo: ProductRepository = new ProductRepository()
  
 
 const getProducts = async () => {
-    products.value = await repo.getFiveProducts()
+    products.value = await repo.getAllProducts()
     isLoading.value = false;
 }
 
@@ -95,6 +95,7 @@ onMounted(() => {
             bottom: 0;
             left: 0;
             z-index: 1;
+            height: 480px;
         }
 
         .image2 {
@@ -102,11 +103,12 @@ onMounted(() => {
             bottom: 0;
             right: 0;
             z-index: 1;
+            height: 500px;
         }
 
         .container-carousel {
-            height: 600px;
-            width: 1000px;
+            height: 80%;
+            width: 900px;
             background-color: #1C2942;
             border-radius: 15px;
             padding: 15px;
