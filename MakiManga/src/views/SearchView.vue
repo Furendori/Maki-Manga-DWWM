@@ -9,22 +9,18 @@ export default {
     };
   },
   methods: {
-    search() {
-      this.searchResults = this.performSearch(
-        this.selectedProductType,
-        this.selectedGenre,
-        this.searchTerm
-      );
-    },
-    performSearch(productType, genre, searchTerm) {
-      console.log("Recherche pour", productType, genre, searchTerm);
-
-      return ["y'a rien chacal"];
+    async search() {
+      try {
+        const response = await fetch(`/api/search?productType=${this.selectedProductType}&genre=${this.selectedGenre}&term=${this.searchTerm}`);
+        const data = await response.json();
+        this.searchResults = data;
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
     }
   }
 };
 </script>
-
 
 
 <template>
@@ -35,39 +31,49 @@ export default {
     </div>
 
     <div class="search-bar">
-    <label for="product-type">Type de Produit:</label>
-    <select id="product-type" v-model="selectedProductType">
-      <option value="Figurines">Figurines</option>
-      <option value="Décorations">Décorations</option>
-      <option value="Goodies">Goodies</option>
-    </select>
+      <div class="search-inputs">
+        <label for="product-type">Type de Produit:</label>
+        <select id="product-type" v-model="selectedProductType">
+          <option value="Figurines">Figurines</option>
+          <option value="Décorations">Décorations</option>
+          <option value="Goodies">Goodies</option>
+        </select>
 
-    <label for="genres">Genres:</label>
-    <select id="genres" v-model="selectedGenre">
-      <option value="action">Action</option>
-      <option value="drama">Drame</option>
-      <option value="comedy">Comédie</option>
-    </select>
+        <label for="genres">Genres:</label>
+        <select id="genres" v-model="selectedGenre">
+          <option value="action">Action</option>
+          <option value="drama">Drame</option>
+          <option value="comedy">Comédie</option>
+        </select>
 
-    <input type="text" placeholder="Recherche..." v-model="searchTerm">
-    <button @click="search">Rechercher</button>
+        <input type="text" placeholder="Recherche..." v-model="searchTerm">
+      </div>
 
-    <div class="results">
-      <ul>
-        <li v-for="result in searchResults">{{ result }}</li>
-      </ul>
+      <button @click="search">Rechercher</button>
+
+      <div class="results">
+        <ul v-if="searchResults.length > 0">
+          <li v-for="result in searchResults" :key="result._id">
+            {{ result.name }} - {{ result.genre }}
+          </li>
+        </ul>
+        <p v-else>Aucun résultat trouvé.</p>
+      </div>
     </div>
-  </div>
 
     <div class="content">
-      <p>Veuillez indiquer ce que vous recherchez...</p>
+      <p v-if="!searchTerm">Veuillez indiquer ce que vous recherchez...</p>
     </div>
   </div>
 
   <main>
+
     <div class="search-container-2"></div>
   </main>
 </template>
+
+
+
 
 <style scoped>
   #app {
@@ -85,6 +91,8 @@ export default {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
   }
 
   .search {
@@ -101,8 +109,8 @@ export default {
   p {
     color: #888;
     font-size: 14px;
+    text-align: center;
   }
-
   .search-bar {
     display: flex;
     flex-wrap: wrap;
@@ -151,6 +159,10 @@ export default {
     text-align: center;
     color: #555;
   }
+
+  .results {
+  margin-top: 10px;
+}
 
   @media screen and (max-width: 768px) {
     .search-bar {

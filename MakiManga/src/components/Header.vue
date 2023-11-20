@@ -1,4 +1,4 @@
-<script>
+<script setup>
 
 // animation de la barre de recherche
 function setSearch(oEvent){
@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded',function(){
     oEvent.preventDefault();oInput.focus() ;
   });
 });
-
 </script>
+
+
 
 
 <template>
@@ -52,8 +53,8 @@ document.addEventListener('DOMContentLoaded',function(){
   <li><router-link to="/Search" @click="closeMenu">LICENCES</router-link></li>
   <li><router-link to="/products" @click="closeMenu">PRODUITS</router-link></li>
   <li><router-link to="/Contact" @click="closeMenu">CONTACT</router-link></li>
-  <li><router-link to="" @click="closeMenu"><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link></li>
-  <li><router-link to="./Login" @click="closeMenu"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link></li>
+  <li><router-link to="/Panier" @click="closeMenu"><i class="fa-solid fa-bag-shopping fa-lg" style="color: #ffffff;"></i></router-link></li>
+  <li><router-link to="/Login" @click="closeMenu"><i class="fa-solid fa-circle-user fa-2xl" style="color: #ffffff;"></i></router-link></li>
 </ul>
   </section>
 </template>

@@ -48,6 +48,16 @@ const router = createRouter({
       name: 'myaccount',
       component: () => import('../views/MyAccount.vue')
     },
+    {
+      path: '/Panier',
+      name: 'Panier',
+      component: () => import('../views/PanierView.vue')
+    },
+    {
+      path: '/Paiement',
+      name: 'Paiement',
+      component: () => import('../views/PaiementView.vue')
+    }
   ]
 })
 

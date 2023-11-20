@@ -43,4 +43,7 @@ module.exports = server => {
     server.delete("/products/:id", (req, res) => {
         ProductController.delete(req, res);
     });
+    server.get("/search", (req, res) => {
+        ProductController.searchProducts(req, res);
+      });
 }
