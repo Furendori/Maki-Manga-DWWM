@@ -1,6 +1,9 @@
 const UserController = require("../controller/user");
 const ProductController = require("../controller/product");
-module.exports = server => {
+
+const SendEmailController = require("../controllers/sendEmail");
+
+module.exports = (server) => {
     
     server.get("/users", (req, res) => {
         UserController.getAll(req, res);
@@ -37,4 +40,7 @@ module.exports = server => {
     server.delete("/products/:id", (req, res) => {
         ProductController.delete(req, res);
     });
+    server.get("/search", (req, res) => {
+        ProductController.searchProducts(req, res);
+      });
 }

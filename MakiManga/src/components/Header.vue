@@ -1,4 +1,4 @@
-<script>
+<script setup>
 
 // animation de la barre de recherche
 function setSearch(oEvent){
@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded',function(){
     oEvent.preventDefault();oInput.focus() ;
   });
 });
-
 </script>
+
+
 
 
 <template>
