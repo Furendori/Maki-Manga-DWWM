@@ -46,10 +46,10 @@ h2 {
 }
 
 .infos-form {
-    display: flex;
-    justify-content: center;
-    margin-top: 2.6%;
-    margin-bottom: 7%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+  margin-bottom: 7%;
 }
 
 .account-form {
@@ -57,6 +57,10 @@ h2 {
   width: 60%;
   display: flex;
   justify-content: center;
+}
+
+label {
+  font-size: 24px;
 }
 
 .form-content {
@@ -68,6 +72,8 @@ h2 {
   display: flex;
   flex-direction: row;
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .submit-btn {
@@ -109,6 +115,4 @@ h2 {
   width: 50%;
   margin-left: 5px;
 }
-
-
 </style>

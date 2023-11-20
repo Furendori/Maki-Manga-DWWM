@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { ProductRepository } from '../repositories/ProductRepository'
-import Carousel from '@/components/Carousel.vue'
-import Button from '../components/Button.vue'
+import { ref, onMounted } from 'vue';
+import { ProductRepository } from '@/repositories/ProductRepository';
+import { ProductInterface } from '@/interfaces/ProductInterface';
+import Carousel from '@/components/Carousel.vue';
 import Partners from '@/components/Partners.vue';
 import ProductCard from '@/components/ProductCard.vue';
 
-const products = ref([])
+const products = ref<ProductInterface>([])
 const isLoading = ref(true)
 
 const repo: ProductRepository = new ProductRepository()
  
 
 const getProducts = async () => {
-    products.value = await repo.getAllProducts()
-    isLoading.value = false;
+    try {
+        products.value = await repo.getAllProducts()
+        isLoading.value = false; 
+    } catch (error) {
+        console.log('Erreur lors de la récupération des produits:', error);
+    }
 }
 
 onMounted(() => {
@@ -35,16 +39,7 @@ onMounted(() => {
     <div class="container-news">
         <h3>Nouveautés</h3>
         <div class="container-cards">
-            <div class="card" v-for="product in products">
-                <div class="container-img">
-                    <router-link :to="`/products/${product['id']}`">
-                        <img :src="product['image']" alt="">
-                    </router-link>
-                </div>
-                <p>{{ product['name'] }}</p>
-                <p>{{ product['price'] }}€</p>
-                <Button>Ajouter au panier</Button>
-            </div> 
+            <ProductCard :product="product" v-for="product in products" :key="product._id"></ProductCard>
         </div>
     </div>
 
@@ -63,17 +58,7 @@ onMounted(() => {
     <div class="container-news">
         <h3>Meilleures ventes</h3>
         <div class="container-cards">
-            <!-- <div class="card" v-for="product in products">
-                <div class="container-img">
-                    <router-link to="#"><img :src="product['image']" alt=""></router-link>
-                </div>
-                <div class="product-details">
-                    <p>{{ product['name'] }}</p>
-                    <p>{{ product['price'] }}€</p>
-                    <Button>Ajouter au panier</Button>
-                </div>
-            </div>  -->
-            <ProductCard :product="product" v-for="product in products" :key="product['id']"></ProductCard>
+            <ProductCard :product="product" v-for="product in products" :key="product._id"></ProductCard>
         </div>
     </div>
 

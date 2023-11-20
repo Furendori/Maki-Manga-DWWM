@@ -17,7 +17,7 @@ export class ProductRepository extends BaseRepository {
         return await this.request(`/products`, 'POST', body);
     }
     
-    deleteProduct = async (id: number) => {
+    deleteProduct = async (id: string) => {
         return await this.request(`/products/${id}`, 'DELETE');
     }
 }

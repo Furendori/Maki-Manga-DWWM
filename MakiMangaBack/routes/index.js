@@ -8,12 +8,12 @@ module.exports = server => {
         UserController.getAll(req, res);
     });
 
-    server.get("/products", (req, res) => {
-        ProductController.getAll(req, res);
-    });
-
     server.get("/user/:id", (req, res) => {
         UserController.get(req,res);
+    });
+
+    server.get("/products", (req, res) => {
+        ProductController.getAll(req, res);
     });
 
     server.get("/product/:id", (req, res) => {
@@ -23,6 +23,10 @@ module.exports = server => {
     server.post("/users", (req, res) => {
         UserController.create(req, res);
     });
+
+    server.post("/users/:id", (req, res) => {
+        UserController.update(req, res);
+    })
 
     server.post("/products", (req, res) => {
         ProductController.create(req, res);

@@ -20,14 +20,16 @@ let registerUserData = async () => {
       password: userPassword.value,
       phone: userPhone.value,
       email: userEmail.value,
-     });
-     
+    });
+
     router.push({ path: '/' })
     
   } catch (error) {
     console.error("Erreur lors de l'envoi de la requête", error);
   }
 };
+
+
 </script>
 
 <template>
@@ -78,7 +80,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .inscrip {
@@ -98,7 +99,6 @@ body {
 }
 
 .centered-form {
-  display: inline-block;
   text-align: left;
   border: 2px solid #1c2942;
   border-radius: 70px;
@@ -113,10 +113,7 @@ body {
 .form-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100%;
-  text-align: center;
 }
 
 .form-info label {
@@ -152,8 +149,8 @@ form {
   border-width: 1px;
   padding: 10px;
   border-radius: 15px;
-  background-color: #1c2942;
   color: white;
+  background-color: #1c2942;
 }
 
 .remi {
@@ -161,28 +158,24 @@ form {
   width: 250px;
   position: absolute;
   top: 35%;
-  margin-left: 2%;
+  left: 3%;
 }
 
 .maomao {
   height: 400px;
   width: 400px;
   position: absolute;
-  right: 0;
+  right: 1%;
   top: 35%;
   margin-right: 1%;
 }
 
 @media screen and (max-width: 470px) {
   .remi {
-    /* height: 200px;
-    width: 120px; */
     display: none;
   }
 
   .maomao {
-    /* height: 200px;
-    width: 200px; */
     display: none;
   }
 
