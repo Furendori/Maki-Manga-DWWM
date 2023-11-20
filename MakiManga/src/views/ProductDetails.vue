@@ -2,20 +2,20 @@
 import { useRoute } from 'vue-router';
 import { ref, onMounted } from 'vue';
 import { ProductRepository } from '@/repositories/ProductRepository';
-import { ProductInterface } from '@/interfaces/ProductInterface';
+import type { ProductInterface } from '@/interfaces/ProductInterface';
 
 const route = useRoute();
-const product = ref<ProductInterface>({});
+const product = ref<ProductInterface>();
 const isLoading = ref(true);
-const ProductId: string = route.params._id;
+const productId: string = route.params.id as string;
 const repo: ProductRepository = new ProductRepository();
-console.log(typeof ProductId.value)
+console.log(productId);
 
 const getProduct = async () => {
     try {
         // typeof ProductId.value === 'string' ? ProductId.value: '';
-        product.value = await repo.getProduct(ProductId);
-        console.log(product)
+        product.value = await repo.getProduct(productId);
+        console.log(product.value)
         isLoading.value = false; 
     } catch (error) {
         console.log('Erreur lors de la récupération du produit:', error);

@@ -8,8 +8,8 @@ module.exports = {
     },
 
     get(req, res) {
-        const id = req.params._id;
-        ProductModel.findById(id).then(product => {
+        const id = req.params.id;
+        ProductModel.findOne({_id: id}).then(product => {
             res.send(product);
         }).catch(error => {
             console.error('Erreur lors de la récupération du produit par ID', error);
