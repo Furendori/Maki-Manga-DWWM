@@ -34,25 +34,25 @@ const props = defineProps<{
 </template>
 
 <style scoped lang="scss">
-    .card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-    .content {
-        width: 300px;
-        height: 500px;
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  .content {
+      width: 300px;
+      height: 500px;
 
-        .image-container{
-        width: 100%;
+    .image-container{
+    width: 100%;
+    height: 300px;
+
+      img {
         height: 300px;
-
-            img {
-                height: 300px;
-                width: 200px;
-                object-fit: cover;
-            }
-        }  
-    }   
+        width: 200px;
+        object-fit: cover;
+      }
+    }  
+  }   
 }
 </style>

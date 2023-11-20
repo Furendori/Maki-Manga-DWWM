@@ -17,4 +17,8 @@ export class UserRepository extends BaseRepository {
     deleteUser = async (id: number) => {
         return await this.request(`/users/${id}`, 'DELETE');
     }
+
+    updateUser = async (id: number) => {
+        return await this.request(`/users/${id}`, 'PATCH')
+    }
 }

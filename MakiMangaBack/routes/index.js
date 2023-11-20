@@ -24,6 +24,10 @@ module.exports = server => {
         UserController.create(req, res);
     });
 
+    server.post("/users/:id", (req, res) => {
+        UserController.update(req, res);
+    })
+
     server.post("/products", (req, res) => {
         ProductController.create(req, res);
     });
