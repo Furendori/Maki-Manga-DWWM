@@ -1,20 +1,43 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import router from "../router/index";
-import { UserRepository } from '../repositories/UserRepository';
+import { UserRepository } from "../repositories/UserRepository";
 
 const repo: UserRepository = new UserRepository();
 
 let userFirstName = ref("");
 let userLastName = ref("");
 let userEmail = ref("");
+let userPasswordConfirm = ref("");
 let userPassword = ref("");
 let userPhone = ref(0);
+let errorMessage = "";
 let sent = ref();
+
+let passwordsMatch = computed(() => {
+  return userPassword.value === userPasswordConfirm.value;
+});
 
 let registerUserData = async () => {
   try {
-     await repo.createUser({
+    if (
+      !userFirstName.value ||
+      !userLastName.value ||
+      !userPassword.value ||
+      !userPasswordConfirm.value ||
+      !userPhone.value ||
+      !userEmail.value
+    ) {
+      errorMessage = "Veuillez remplir les champs obligatoires.";
+      return;
+    }
+
+    if (!passwordsMatch.value) {
+      errorMessage = "Les mots de passe ne correspondent pas.";
+      return;
+    }
+
+    await repo.createUser({
       firstName: userFirstName.value,
       lastName: userLastName.value,
       password: userPassword.value,
@@ -22,19 +45,18 @@ let registerUserData = async () => {
       email: userEmail.value,
     });
 
-    router.push({ path: '/' })
-    
+    router.push({ path: "/" });
   } catch (error) {
     console.error("Erreur lors de l'envoi de la requête", error);
   }
 };
-
-
 </script>
 
 <template>
   <img class="remi" src="../assets/img/latest.png" alt="" />
-  <p v-show="sent && sent != ''">{{ sent ? "Données envoyées avec succès" : "Problème" }}</p>
+  <p v-show="sent && sent != ''">
+    {{ sent ? "Données envoyées avec succès" : "Problème" }}
+  </p>
   <form action="" class="centered-form" @submit.prevent="registerUserData">
     <div class="form-content">
       <div class="form-header">
@@ -44,24 +66,39 @@ let registerUserData = async () => {
 
       <div class="form-info">
         <label for="firstName">Prénom : *</label>
-        <input type="text" id="firstName" v-model="userFirstName" />
+        <input type="text" id="firstName" v-model="userFirstName" required />
 
         <label for="lastName">Nom : *</label>
-        <input type="text" id="lastName" v-model="userLastName" />
+        <input type="text" id="lastName" v-model="userLastName" required />
 
         <label for="email">Email : *</label>
-        <input type="email" id="email" v-model="userEmail" />
+        <input type="email" id="email" v-model="userEmail" required />
 
         <label for="password">Mot de passe : *</label>
-        <input type="password" id="password" v-model="userPassword" />
+        <input type="password" id="password" v-model="userPassword" required />
+        <span class="error-message">{{ errorMessage }}</span>
 
         <label for="passwordConfirm">Confirmation du mot de passe : *</label>
-        <input type="password" id="passwordConfirm" />
-
+        <input
+          type="password"
+          id="passwordConfirm"
+          v-model="userPasswordConfirm"
+          required
+        />
+        <span class="error-message">{{ errorMessage }}</span>
+        <span v-if="!passwordsMatch" class="error-message"
+          >Les mots de passe ne correspondent pas.</span
+        >
+        
         <label for="phone">Numéro de téléphone :</label>
-        <input type="tel" id="phone" v-model="userPhone" />
+        <input type="tel" id="phone" v-model="userPhone" required />
 
-        <input type="checkbox" name="termsAgree" id="termsConditions" />
+        <input
+          type="checkbox"
+          name="termsAgree"
+          id="termsConditions"
+          required
+        />
         <label for="termsConditions" class="terms-check"
           >J'ai lu et j'accepte les termes et conditions</label
         >
