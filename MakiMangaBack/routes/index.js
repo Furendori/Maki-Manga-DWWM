@@ -8,12 +8,12 @@ module.exports = server => {
         UserController.getAll(req, res);
     });
 
-    server.get("/products", (req, res) => {
-        ProductController.getAll(req, res);
-    });
-
     server.get("/user/:id", (req, res) => {
         UserController.get(req,res);
+    });
+
+    server.get("/products", (req, res) => {
+        ProductController.getAll(req, res);
     });
 
     server.get("/product/:id", (req, res) => {

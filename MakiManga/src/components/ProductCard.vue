@@ -1,32 +1,33 @@
 <script setup lang="ts">
 import Button from './Button.vue';
-import { onMounted } from 'vue';
 
 const props = defineProps<{
     product: {
-        id: string;
+        _id: string;
         name: string;
         price: number;
         image: string;
     }
 }>();
+
 </script>
 
 <template>
   <div class="card">
     <div class="content">
       <div class="image-container">
-        <RouterLink :to="`/products/${product['id']}`">
-          <img :src="product['image']" :alt="product['name']" />
+        <RouterLink :to="`/products/${product._id.toString()}`">
+          <img :src="product.image" :alt="product.name" />
         </RouterLink>
       </div>
       <div class="card-content">
-        <h2>
-          <RouterLink :to="{ name: 'product', params: { id: product['id'] }}">
-            {{ product['name'] }}
+        <h3>
+          <RouterLink :to="{ name: 'product', params: { id: product._id.toString() }}">
+            {{ product.name }}
           </RouterLink>
-          <p>{{ product['price'] }}</p>
-        </h2>
+        </h3>
+          <p>{{ product.price }}€</p>
+        
         <Button>Ajouter au panier</Button>
       </div>
     </div>
@@ -39,10 +40,10 @@ const props = defineProps<{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    width: 200px;
+    height: 450px;
+    margin: 10px;
   .content {
-      width: 300px;
-      height: 500px;
-
     .image-container{
     width: 100%;
     height: 300px;
@@ -52,7 +53,30 @@ const props = defineProps<{
         width: 200px;
         object-fit: cover;
       }
-    }  
+    }
+    .card-content {
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        margin: 0;
+        a {
+          text-decoration: none;
+          color: #1C2942;
+        }
+      }
+
+      p {
+        margin: 0;
+        color: #1C2942;
+        margin-bottom: 5px;
+      }
+
+      Button {
+        width: 150px;
+        align-self: center;
+      }
+    }
   }   
 }
 </style>
