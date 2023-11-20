@@ -8,10 +8,13 @@ module.exports = {
     },
 
     get(req, res) {
-        const id = req.params.id;
+        const id = req.params._id;
         ProductModel.findById(id).then(product => {
             res.send(product);
-        });
+        }).catch(error => {
+            console.error('Erreur lors de la récupération du produit par ID', error);
+            res.status(500).send('Erreur serveur');
+        })
     },
 
     create(req, res) {
@@ -35,7 +38,7 @@ module.exports = {
     },
 
     delete(req, res) {
-        const id = req.params.id;
+        const id = req.params._id;
         ProductModel.findByIdAndRemove(id).then(product => {
             res.send({
                 response: `Suppression du produit ${product.name} a bien été supprimé`
