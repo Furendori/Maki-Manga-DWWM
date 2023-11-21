@@ -1,13 +1,9 @@
 <script setup lang="ts">
+import type { ProductInterface } from '@/interfaces/ProductInterface';
 import Button from './Button.vue';
 
 const props = defineProps<{
-    product: {
-        _id: string;
-        name: string;
-        price: number;
-        image: string;
-    }
+    product: ProductInterface
 }>();
 
 </script>

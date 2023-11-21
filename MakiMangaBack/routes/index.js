@@ -46,7 +46,7 @@ module.exports = server => {
     });
 
     server.post("/send_email", (req, res) => {
-        SendEmailController.sendMail(req, res);
+        SendEmailController.sendEmail(req, res);
     });
 
     server.delete("/users/:id", (req, res) => {

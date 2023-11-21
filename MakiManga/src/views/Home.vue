@@ -12,7 +12,6 @@ const popularProduct =ref<ProductInterface[]>([]);
 const isLoading = ref(true);
 
 const repo: ProductRepository = new ProductRepository();
- 
 
 const getProducts = async () => {
     try {

@@ -93,10 +93,7 @@ let login = async () => {
   </div>
 </template>
 
-<style>
-body {
-  margin: 0;
-}
+<style scoped>
 
 div.login {
   width: 900px;

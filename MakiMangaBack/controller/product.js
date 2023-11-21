@@ -9,15 +9,15 @@ module.exports = {
     });
   },
 
-    get(req, res) {
-        const id = req.params.id;
-        ProductModel.findOne({_id: id}).then(product => {
-            res.send(product);
-        }).catch(error => {
-            console.error('Erreur lors de la récupération du produit par ID', error);
-            res.status(500).send('Erreur serveur');
-        })
-    },
+  get(req, res) {
+    const id = req.params.id;
+    ProductModel.findOne({ _id: id }).then(product => {
+      res.send(product);
+    }).catch(error => {
+      console.error('Erreur lors de la récupération du produit par ID', error);
+      res.status(500).send('Erreur serveur');
+    })
+  },
 
   create(req, res) {
     const product = new ProductModel({ ...req.body });
@@ -50,8 +50,6 @@ module.exports = {
       });
     });
   },
-
-
   
   // la fonction de recherche
   searchProducts(req, res) {

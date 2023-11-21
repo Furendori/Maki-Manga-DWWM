@@ -1,4 +1,4 @@
-export class BaseRepository {
+export abstract class BaseRepository {
     // Properties
     private host: string = "http://localhost:5500";
 
