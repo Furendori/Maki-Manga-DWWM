@@ -36,8 +36,20 @@ export default {
       return this.calculateSubtotal() + this.deliveryCost;
     },
     applyPromoCode() {
+    if (!this.promoApplied && this.promoCode === 'MAKI10') {
       console.log('Code promo appliqué :', this.promoCode);
-    },
+      const discountPercentage = 0.10;
+      const discountAmount = this.calculateSubtotal() * discountPercentage;
+      this.cartItems = this.cartItems.map(item => ({
+        ...item,
+        price: item.price - discountAmount,
+      }));
+      this.promoApplied = true;
+    } else {
+      console.log('Code promo invalide ou déjà appliqué');
+  }
+},
+
     processPayment() {
     //paiement logique ici
     },
@@ -93,10 +105,7 @@ export default {
 
          
         </div> 
-        <div class="promo-code">
-            <label for="promoCode"></label>
-            <input type="text" id="promoCode" v-model="promoCode" placeholder="Code promo...">
-          </div>
+        
           
           <button type="submit" @click="processPayment">Valider</button>
           <h5>Paiement sécurisé</h5>
@@ -106,7 +115,6 @@ export default {
       <!-- separateur -->
       <div class="separateur"></div>
 
-      <!-- Right Section -->
       <div class="cart-paiement-container">
         <div class="cart-container">
           <h2>Votre Panier</h2>
@@ -118,7 +126,12 @@ export default {
           <div class="subtotal">Sous-total : {{ calculateSubtotal() }} €</div>
           <div class="delivery">Livraison : {{ deliveryCost }} €</div>
           <div class="total">Total à payer : {{ calculateTotal() }} €</div>
-        </div>
+          </div>
+          <div class="promo-code">
+            <label for="promoCode"></label>
+            <input type="text" id="promoCode" v-model="promoCode" placeholder="Code promo...">
+            <button @click="applyPromoCode">Appliquer</button>
+          </div>
       </div>
     </div>
     <h4>Merci de votre confiance.</h4>
@@ -229,8 +242,6 @@ button {
   display: flex;
   width: 70%;
 }
-
-
 
 @media screen and (max-width: 600px) {
   .checkout-container {
