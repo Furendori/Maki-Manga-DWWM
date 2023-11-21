@@ -32,7 +32,7 @@ module.exports = {
   },
 
   update(req, res) {
-    const id = req.body._id;
+    const id = req.body.id;
     if (id) {
       ProductModel.findByIdAndUpdate(id, req.body).then((product) => {
         res.send(`Mise à jour du produit ${product.name}`);
