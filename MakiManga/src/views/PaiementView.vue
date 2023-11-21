@@ -1,27 +1,71 @@
+<script>
+export default {
+  data() {
+    return {
+      loggedIn: false,
+      lastName: '',
+      address: '',
+      apartment: '',
+      postalCode: '',
+      city: '',
+      phone: '',
+      saveAddress: false,
+      sendOffers: false,
+      cartItems: [
+        { name: 'Nom figurine', price: 20 },
+      ],
+      deliveryCost: 3,
+      promoCode: '',
+      paymentInfo: {
+        cardNumber: '',
+        expiryDate: '',
+        ccv: '',
+      },
+    };
+  },
+  methods: {
+    calculateDeliveryCost() {
+      if (this.saveAddress) {
+        this.deliveryCost = 0;
+      }
+    },
+    calculateSubtotal() {
+      return this.cartItems.reduce((total, item) => total + item.price, 0);
+    },
+    calculateTotal() {
+      return this.calculateSubtotal() + this.deliveryCost;
+    },
+    applyPromoCode() {
+      console.log('Code promo appliqué :', this.promoCode);
+    },
+    processPayment() {
+    //paiement logique ici
+    },
+  },
+};
+</script>
+
+
 <template>
   <div id="app">
     <div class="checkout-container">
+
       <div class="adresse-container">
-        <h2>Adresse de livraison</h2>
-
         <div class="infos-form">
-          <p>Livraison offerte dans toute la france.</p>
         </div>
-
         <div class="adresse-form">
-          <label for="firstName">Prénom</label>
-          <input type="text" id="firstName" v-model="firstName" required placeholder="Votre prénom...">
-
-          <label for="lastName">Nom</label>
+          <h1>Contact</h1>
+          <label for="lastName"></label>
           <input type="text" id="lastName" v-model="lastName" required placeholder="Votre nom...">
 
-          <label for="email">Email</label>
+          <label for="email"></label>
           <input type="email" id="email" v-model="email" required placeholder="Votre email...">
 
-          <label for="address">Adresse</label>
+          <h1>Livraison</h1>
+          <label for="address"></label>
           <input type="text" id="address" v-model="address" required placeholder="Votre adresse...">
 
-          <label for="apartment">Numéro d’appartement, de suite, etc.</label>
+          <label for="apartment">Numéro d’appartement, de suite, etc...</label>
           <input type="text" id="apartment" v-model="apartment" placeholder="Votre numéro d'appartement...">
 
           <label for="postalCode">Code postal</label>
@@ -31,40 +75,53 @@
           <input type="text" id="city" v-model="city" required placeholder="Votre ville...">
 
           <label for="phone">Téléphone (optionnel)</label>
-          <input type="text" id="phone" v-model="phone">
+          <input type="text" id="phone" v-model="phone" placeholder="Votre téléphone...">
         </div>
+        
+         <div class="paiement-container">
+          <h2>Carte de crédit</h2>
+          <div class="paiement-details">
+            <label for="cardNumber">Numéro de carte :</label>
+            <input type="text" id="cardNumber" v-model="paymentInfo.cardNumber" required placeholder="**** **** **** ****">
+
+            <label for="expiryDate">Date d'expiration :</label>
+            <input type="text" id="expiryDate" v-model="paymentInfo.expiryDate" placeholder="MM/YYYY" required>
+
+            <label for="ccv">CCV :</label>
+            <input type="text" id="ccv" v-model="paymentInfo.ccv" required placeholder="***">
+          </div>
+
+         
+        </div> 
+        <div class="promo-code">
+            <label for="promoCode"></label>
+            <input type="text" id="promoCode" v-model="promoCode" placeholder="Code promo...">
+          </div>
+          
+          <button type="submit" @click="processPayment">Valider</button>
+          <h5>Paiement sécurisé</h5>
+          <img src="../assets/img/logo-cart.png" alt="" width="150">
       </div>
 
-      <div class="cart-container paiement-container">
-        <h2>Votre Panier</h2>
-        <ul>
-          <li v-for="(item, index) in cartItems" :key="index">
-            {{ item.name }} - {{ item.price }} €
-          </li>
-        </ul>
-        <div class="total">Total à payer : {{ calculateTotal() }} €</div>
+      <!-- separateur -->
+      <div class="separateur"></div>
 
-        <div class="promo-code">
-        <label for="promoCode">Code promo :</label>
-        <input type="text" id="promoCode" v-model="promoCode" placeholder="Code promo...">
-        <button @click="applyPromoCode">Appliquer</button>
+      <!-- Right Section -->
+      <div class="cart-paiement-container">
+        <div class="cart-container">
+          <h2>Votre Panier</h2>
+          <ul>
+            <li v-for="(item, index) in cartItems" :key="index">
+              {{ item.name }} - {{ item.price }} €
+            </li>
+          </ul>
+          <div class="subtotal">Sous-total : {{ calculateSubtotal() }} €</div>
+          <div class="delivery">Livraison : {{ deliveryCost }} €</div>
+          <div class="total">Total à payer : {{ calculateTotal() }} €</div>
         </div>
-        <h2>Paiement par carte</h2>
-
-        <div class="payment-details">
-          <label for="cardNumber">Numéro de carte :</label>
-          <input type="text" id="cardNumber" v-model="paymentInfo.cardNumber" required>
-
-          <label for="expiryDate">Date d'expiration :</label>
-          <input type="text" id="expiryDate" v-model="paymentInfo.expiryDate" placeholder="MM/YYYY" required>
-
-          <label for="ccv">CCV :</label>
-          <input type="text" id="ccv" v-model="paymentInfo.ccv" required>
-        </div>
-
-        <button type="submit" @click="processPayment">Payer</button>
       </div>
     </div>
+    <h4>Merci de votre confiance.</h4>
   </div>
 </template>
 
@@ -77,33 +134,66 @@
   margin-top: 30px;
   margin-bottom: 30px;
   padding: 20px;
-  border: 2px solid #1c2942;
-  color: black;
+  color: rgb(0, 0, 0);
   background-color: #ffffff;
 }
 
-.adresse-container,
-.cart-container {
-  width: 45%;
+h1 {
+  margin: 0;
+}
+.adresse-container {
+  width: 60%;
 }
 
-.payment-form {
+.separateur {
+  width: 1px;
+  background-color: #000000;
+  margin: 0 20px;
+}
+
+.cart-paiement-container {
+  display: flex;
+  width: 30%;
+}
+
+.cart-container,
+.paiement-container {
+  width: 100%;
+}
+.paiement-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #1c2942;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.paiement-details {
   margin: 0 auto;
+  width: 75%;
 }
 
 label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
+  margin: 5px;
 }
 
 input {
-  width: 100%;
+  width: 90%;
+  height: 44px;
   padding: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   box-sizing: border-box;
-  border-radius: 20px;
-  border: 2px solid #1c2942;
-  background: #ccc;
+  border-radius: 10px;
+  border: 1px solid #1c2942;
+  background: #e8e8e8;
+  font-style: italic;
 }
 
 .checkbox-label-paiement {
@@ -122,55 +212,49 @@ button {
   border: none;
   padding: 5px 10px;
   cursor: pointer;
-  width: 40%;
-  height: 7%;
-  border-radius: 30px;
+  width: 200Px;
+  height: 50px;
+  border-radius: 10px;
+}
+.cart-paiement-container {
+  display: flex;
+  flex-direction: column;
+  justify-content:right;
+}
+.checkout-container {
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  display: flex;
+  width: 70%;
 }
 
+
+
 @media screen and (max-width: 600px) {
-  div.paiement-container {
+  .checkout-container {
+    flex-direction: column;
     width: 90%;
+    align-items: center;
+  }
+
+  .adresse-container,
+  .cart-paiement-container,
+  .cart-container,
+    .paiement-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .separateur {
+    width: 100%;
+    margin: 20px 0;
   }
 }
 </style>
-<script>
-export default {
-  data() {
-    return {
-      loggedIn: false,
-      firstName: '',
-      lastName: '',
-      address: '',
-      apartment: '',
-      postalCode: '',
-      city: '',
-      phone: '',
-      saveAddress: false,
-      sendOffers: false,
-      cartItems: [
-        { name: 'Produit 1', price: 20 },
-        { name: 'Produit 2', price: 30 },
-      ],
-      promoCode: "",
-      paymentInfo: {
-        cardNumber: "",
-        expiryDate: "",
-        ccv: "",
-      },
-    };
-  },
-  methods: {
-    login() {
-      this.loggedIn = true;
-    },
-    calculateTotal() {
-      return this.cartItems.reduce((total, item) => total + item.price, 0);
-    },
-    applyPromoCode() {
-      console.log("Code promo appliqué :", this.promoCode);
-    },
-    processPayment() {
-    },
-  },
-};
-</script>
+
+
+
