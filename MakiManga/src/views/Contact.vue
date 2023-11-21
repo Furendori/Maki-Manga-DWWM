@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue';
+import { SendEmailRepository } from '@/repositories/SendEmailRepository';
 import { ref } from 'vue';
+import router from "../router/index";
 
 const optionsObject = ref([
   {
@@ -13,16 +15,30 @@ const optionsObject = ref([
     name: "Autres"
   }]);
 
+const repo: SendEmailRepository = new SendEmailRepository();
+
 const name = ref("")
 const email = ref("")
 const objectSelect = ref("")
 const subject = ref("")
 const message = ref("")
 
-const sendEmail = {
-  from: email.value,
-  subject: subject.value,
-  text: message.value,
+const sendEmail = async () => {
+  try {
+    await repo.sendEmail({
+      from: email.value,
+      subject: subject.value,
+      text: message.value,
+      objectSelect: objectSelect.value,
+      name:  name.value
+    });
+
+    router.push({ path: '/' })
+
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de la requête", error);
+  }
+
 }
 </script>
 
@@ -31,7 +47,7 @@ const sendEmail = {
     <h2>Contact</h2>
     <div class="container-form">
       <img src="../assets/img/mangagirl.png" alt="">
-      <form action="POST" >
+      <form action="POST" @submit.prevent="sendEmail">
         <label for="inputName">Name* :</label>
         <input v-model="name" type="text" id="inputName" name="name" required/>
 
@@ -55,7 +71,6 @@ const sendEmail = {
       </form>
     </div>
   </div>
-  
 </template>
 
 <style scoped lang="scss">
@@ -69,7 +84,7 @@ const sendEmail = {
 
   h2 {
     color: #1C2942;
-    margin: 0;
+    margin-bottom: 0;
   }
 
   .container-form {
@@ -77,6 +92,7 @@ const sendEmail = {
     padding: 20px;
     border-radius: 15px;
     position: relative;
+    margin: 20px;
 
     img {
       height: 300px;
