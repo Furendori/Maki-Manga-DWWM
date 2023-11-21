@@ -13,7 +13,6 @@ console.log(productId);
 
 const getProduct = async () => {
     try {
-        // typeof ProductId.value === 'string' ? ProductId.value: '';
         product.value = await repo.getProduct(productId);
         console.log(product.value)
         isLoading.value = false; 

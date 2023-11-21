@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { ProductRepository } from '@/repositories/ProductRepository';
-import { ProductInterface } from '@/interfaces/ProductInterface';
+import type { ProductInterface } from '@/interfaces/ProductInterface';
 import Carousel from '@/components/Carousel.vue';
 import Partners from '@/components/Partners.vue';
 import ProductCard from '@/components/ProductCard.vue';
 
-const products = ref<ProductInterface>([])
-const isLoading = ref(true)
+const products = ref<ProductInterface>();
+const isLoading = ref(true);
 
-const repo: ProductRepository = new ProductRepository()
+const repo: ProductRepository = new ProductRepository();
  
 
 const getProducts = async () => {
