@@ -12,7 +12,6 @@ let userPasswordConfirm = ref("");
 let userPassword = ref("");
 let userPhone = ref(0);
 let errorMessage = "";
-let sent = ref();
 
 let passwordsMatch = computed(() => {
   return userPassword.value === userPasswordConfirm.value;
@@ -54,9 +53,6 @@ let registerUserData = async () => {
 
 <template>
   <img class="remi" src="../assets/img/latest.png" alt="" />
-  <p v-show="sent && sent != ''">
-    {{ sent ? "Données envoyées avec succès" : "Problème" }}
-  </p>
   <form action="" class="centered-form" @submit.prevent="registerUserData">
     <div class="form-content">
       <div class="form-header">
@@ -91,7 +87,7 @@ let registerUserData = async () => {
         >
         
         <label for="phone">Numéro de téléphone :</label>
-        <input type="tel" id="phone" v-model="userPhone" required />
+        <input type="tel" id="phone" v-model="userPhone" />
 
         <input
           type="checkbox"
