@@ -3,7 +3,7 @@ import Button from './Button.vue';
 
 const props = defineProps<{
     product: {
-        _id: string;
+        _id: string | number;
         name: string;
         price: number;
         image: string;
@@ -22,7 +22,7 @@ const props = defineProps<{
       </div>
       <div class="card-content">
         <h3>
-          <RouterLink :to="{ name: 'product', params: { id: product._id.toString() }}">
+          <RouterLink :to="`/products/${product._id.toString()}`">
             {{ product.name }}
           </RouterLink>
         </h3>
@@ -41,7 +41,7 @@ const props = defineProps<{
     align-items: center;
     flex-wrap: wrap;
     width: 200px;
-    height: 450px;
+    height: 420px;
     margin: 10px;
   .content {
     .image-container{
