@@ -1,5 +1,3 @@
-// controllers/products.js
-
 const ProductModel = require("../models/product");
 
 module.exports = {

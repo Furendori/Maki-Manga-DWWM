@@ -66,10 +66,7 @@ export default {
     </div>
   </div>
 
-  <main>
 
-    <div class="search-container-2"></div>
-  </main>
 </template>
 
 
@@ -82,7 +79,6 @@ export default {
     height: 100%;
     width: 100vh;
   }
-
   .search-container {
     max-width: 1100px;
     margin: 50px auto;
@@ -118,6 +114,10 @@ export default {
     margin-bottom: 20px;
   }
 
+  div.search-bar {
+    display: flex;
+    flex-direction: column;
+  }
   label {
     margin-right: 10px;
     font-weight: bold;

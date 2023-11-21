@@ -29,7 +29,7 @@
         <ul>
           <li v-for="(item, index) in cartItems" :key="index">
             {{ item.name }} - {{ item.price }} €
-            <button @click="removeItem(index)">Supprimer</button>
+            <button @click=" removeItem(index)">Supprimer</button>
           </li>
         </ul>
         <div class="total">Sous-total {{ calculateTotal() }} € <p>Livraison offerte à partir de 80€ d'achat</p></div>
@@ -51,7 +51,6 @@
   
   .cart {
     border: 3px solid #1c2942;
-    border-radius: 10px;
     width: 100%;
     padding: 20px;
   }
