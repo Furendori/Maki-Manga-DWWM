@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { ProductRepository } from '../repositories/ProductRepository';
-import Button from "@/components/Button.vue";
+import type { ProductInterface } from '@/interfaces/ProductInterface';
+import ProductCard from "@/components/ProductCard.vue";
 
-const products = ref([]);
+const products = ref<ProductInterface>();
 const isLoading = ref(true);
 
 const repo: ProductRepository = new ProductRepository();
@@ -21,22 +22,27 @@ onMounted(() => {
 <template>
     <div class="main-container">
         <h3>Tous nos produits</h3>
-        <div class="container-products">
-            <div class="card-product" v-for="product in products">
-               <div v-if="product">
-                <img :src="product['image']" alt="">
-                <p>{{ product['name'] }}</p>
-                <p>{{ product['price'] }}</p>
-                <Button>Ajouter au panier</Button>
-            </div>
-                <div v-else>
-                    Loading...
-                </div>   
-            </div>
+        <div v-if="products" class="container-products">
+            <ProductCard :product="product" v-for="product in products" :key="product.id"></ProductCard>
         </div>
+        <div v-else>
+            Loading...
+        </div>   
     </div>
     
 </template>
 
 <style scoped lang="scss">
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 25px;
+        margin-bottom: 25px;
+
+        .container-products {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
 </style>

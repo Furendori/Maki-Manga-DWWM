@@ -16,24 +16,18 @@ export class BaseRepository {
                     'Content-Type': 'application/json',
                 }; //{method: method, body: body, headers: {'Content-Type': 'application/json'}}
             }
+
             let response: Response = await fetch(this.host + path, options);
+            // const contentType = response.headers.get('Content-Type');
 
-                // Check if response is successful
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            // Check if response is JSON
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-                return await response.json();
-            } else {
-                // If response is not JSON, you may want to handle it accordingly
-                return await response.text(); // or handle in a way that suits your needs
-            }
-            // return await response.json();
+            // if (contentType && contentType.includes('application/json')) {
+            //     return await response.json();
+            // } else {
+            //     return null
+            // }
+            return await response.json();
         } catch (e) {
-            console.log(e);
+            console.log('Erreur dans la base repo',e);
         }
     }
 }

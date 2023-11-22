@@ -1,26 +1,98 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { ref } from 'vue';
-import { ProductRepository } from '../repositories/ProductRepository';
+import { ref, onMounted } from 'vue';
+import { ProductRepository } from '@/repositories/ProductRepository';
+import type { ProductInterface } from '@/interfaces/ProductInterface';
+import Button from '@/components/Button.vue';
 
 const route = useRoute();
-const product = ref([]);
+const product = ref<ProductInterface>();
 const isLoading = ref(true);
-
+const productId: string = route.params.id as string;
 const repo: ProductRepository = new ProductRepository();
 
-const getProduct = () => {
-    repo.getProduct(route.params.id);
+const getProduct = async () => {
+    try {
+        product.value = await repo.getProduct(productId);
+        isLoading.value = false; 
+    } catch (error) {
+        console.log('Erreur lors de la récupération du produit:', error);
+    }
 }
 
+
 onMounted(() => {
-    getProducts();
+    getProduct();
  });
 </script>
 
 <template>
-Bienvenue
+    <div class="main-container">
+        <div v-if="product" class="product-container">
+            <h2>Figurine {{ product.name }} - {{ product.licence }}</h2>
+            <div  class="product-details">
+                <div class="container-img">
+                    <img v-if="product.image !== undefined" :src="product.image" :alt="product.name">
+                    <div v-else>
+                        Aucune image n'a été trouvée
+                    </div> 
+                </div>
+                <div class="description-product">
+                    <h5>Description</h5>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae accusantium placeat provident illo rerum modi id nostrum expedita eligendi autem? Obcaecati fugit modi eius cupiditate aliquid vero nostrum ea asperiores.
+                        Suscipit maiores ipsa nam eveniet praesentium inventore enim quis voluptatibus possimus at! Itaque dolor nemo quae voluptas ex doloremque blanditiis accusantium impedit error quis nam ratione excepturi, dicta, magni porro?
+                    </p>
+                    <p>{{ product.price }}€</p>
+                    <Button>Ajouter au panier</Button> 
+                </div>
+            </div>
+        </div>
+
+        <div v-else>
+            Aucun produit n'a été trouvé
+        </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
+.main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    .product-container{
+        display: flex;
+        flex-direction: column;
+        border: 3px solid #1C2942;
+        padding: 10px;
+        border-radius: 10px;
+
+        .product-details {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            .container-img {
+                height: 450px;
+
+                img {
+                    object-fit: cover;
+                    height: 450px;
+                }
+            }
+
+            .description-product {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: start;
+                margin: 15px;
+                width: 300px;
+            }
+        }
+
+        
+    }
+}
 </style>

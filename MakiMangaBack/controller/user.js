@@ -34,4 +34,21 @@ module.exports = {
             res.send({ result: "Un id est nécessaire pour mettre à jour le compte"})
         }
     },
+
+    login: async(req, res) => {
+        const {email, password} = req.body;
+
+        try {
+            const user = await UserModel.findOne({email, password});
+
+            if (!user) {
+                return res.status(401).json({success : false, message : 'Internal email or password'})
+            }
+
+            res.json({success : true, message : 'login successful'});
+        } catch (error) {
+            console.error('Error during login:', error);
+            res.status(500).json({success : false, message : 'Internal server error'})
+        }
+    }
 }

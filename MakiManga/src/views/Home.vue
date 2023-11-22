@@ -1,20 +1,28 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { ProductRepository } from '../repositories/ProductRepository'
-import Carousel from '@/components/Carousel.vue'
-import Button from '../components/Button.vue'
+import { ref, onMounted } from 'vue';
+import { ProductRepository } from '@/repositories/ProductRepository';
+import type { ProductInterface } from '@/interfaces/ProductInterface';
+import Button from '@/components/Button.vue';
+import Carousel from '@/components/Carousel.vue';
 import Partners from '@/components/Partners.vue';
 import ProductCard from '@/components/ProductCard.vue';
 
-const products = ref([])
-const isLoading = ref(true)
+const newProducts = ref<ProductInterface>();
+const popularProduct =ref<ProductInterface>();
+const isLoading = ref(true);
 
-const repo: ProductRepository = new ProductRepository()
+const repo: ProductRepository = new ProductRepository();
  
 
 const getProducts = async () => {
-    products.value = await repo.getAllProducts()
-    isLoading.value = false;
+    try {
+        const allProducts = await repo.getAllProducts();
+        newProducts.value = allProducts.slice(-6);
+        popularProduct.value = allProducts.slice(0,6)
+        isLoading.value = false; 
+    } catch (error) {
+        console.log('Erreur lors de la récupération des produits:', error);
+    }
 }
 
 onMounted(() => {
@@ -32,19 +40,11 @@ onMounted(() => {
         </div>
     </div>
 
-    <div class="container-news">
+    <div class="container-products">
         <h3>Nouveautés</h3>
+        <Button class="lookmore">Voir tout</Button>
         <div class="container-cards">
-            <div class="card" v-for="product in products">
-                <div class="container-img">
-                    <router-link :to="`/products/${product['id']}`">
-                        <img :src="product['image']" alt="">
-                    </router-link>
-                </div>
-                <p>{{ product['name'] }}</p>
-                <p>{{ product['price'] }}€</p>
-                <Button>Ajouter au panier</Button>
-            </div> 
+            <ProductCard :product="product" v-for="product in newProducts" :key="product.id"></ProductCard>
         </div>
     </div>
 
@@ -60,20 +60,11 @@ onMounted(() => {
         </div>
     </div>
 
-    <div class="container-news">
+    <div class="container-products">
         <h3>Meilleures ventes</h3>
+        <Button class="lookmore">Voir tout</Button>
         <div class="container-cards">
-            <!-- <div class="card" v-for="product in products">
-                <div class="container-img">
-                    <router-link to="#"><img :src="product['image']" alt=""></router-link>
-                </div>
-                <div class="product-details">
-                    <p>{{ product['name'] }}</p>
-                    <p>{{ product['price'] }}€</p>
-                    <Button>Ajouter au panier</Button>
-                </div>
-            </div>  -->
-            <ProductCard :product="product" v-for="product in products" :key="product['id']"></ProductCard>
+            <ProductCard :product="product" v-for="product in popularProduct" :key="product.id"></ProductCard>
         </div>
     </div>
 
@@ -120,12 +111,22 @@ onMounted(() => {
             justify-content: center;
         }
     }
-    .container-news {
+    .container-products {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+
         .container-cards {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+        }
+
+        .lookmore {
+            background-color: #1C2942;
+            align-self: flex-end;
+            margin-right: 100px;
         }
     }
     .parallax-effect-1 {

@@ -9,12 +9,15 @@ module.exports = {
     });
   },
 
-  get(req, res) {
-    const id = req.params.id;
-    ProductModel.findById(id).then((product) => {
-      res.send(product);
-    });
-  },
+    get(req, res) {
+        const id = req.params.id;
+        ProductModel.findOne({_id: id}).then(product => {
+            res.send(product);
+        }).catch(error => {
+            console.error('Erreur lors de la récupération du produit par ID', error);
+            res.status(500).send('Erreur serveur');
+        })
+    },
 
   create(req, res) {
     const product = new ProductModel({ ...req.body });
@@ -29,7 +32,7 @@ module.exports = {
   },
 
   update(req, res) {
-    const id = req.body._id;
+    const id = req.body.id;
     if (id) {
       ProductModel.findByIdAndUpdate(id, req.body).then((product) => {
         res.send(`Mise à jour du produit ${product.name}`);
