@@ -64,7 +64,7 @@ onMounted(() => {
     .product-container{
         display: flex;
         flex-direction: column;
-        border: 3px solid #1C2942;
+        border: 3px solid $primary-color;
         padding: 10px;
         border-radius: 10px;
 

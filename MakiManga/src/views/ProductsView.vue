@@ -4,7 +4,7 @@ import { ProductRepository } from '../repositories/ProductRepository';
 import type { ProductInterface } from '@/interfaces/ProductInterface';
 import ProductCard from "@/components/ProductCard.vue";
 
-const products = ref<ProductInterface>();
+const products = ref<ProductInterface[]>([]);
 const isLoading = ref(true);
 
 const repo: ProductRepository = new ProductRepository();
@@ -23,7 +23,7 @@ onMounted(() => {
     <div class="main-container">
         <h3>Tous nos produits</h3>
         <div v-if="products" class="container-products">
-            <ProductCard :product="product" v-for="product in products" :key="product.id"></ProductCard>
+            <ProductCard :product="product" v-for="product in products" :key="product._id"></ProductCard>
         </div>
         <div v-else>
             Loading...
@@ -38,6 +38,10 @@ onMounted(() => {
         flex-direction: column;
         margin-top: 25px;
         margin-bottom: 25px;
+
+        h3 {
+            text-align: center;
+        }
 
         .container-products {
             display: flex;

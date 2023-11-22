@@ -19,14 +19,11 @@ module.exports = {
 
   create(req, res) {
     const product = new ProductModel({ ...req.body });
-    product
-      .save()
-      .then(() => {
-        res.send({
-          response: `Création du produit ${product.name} effectuée avec succès`,
-        });
-      })
-      .catch((e) => console.log(e.toString()));
+    product.save().then(() => {
+      res.send({
+        response: `Création du produit ${product.name} effectuée avec succès`,
+      });
+    }).catch((e) => console.log(e.toString()));
   },
 
   update(req, res) {
