@@ -7,79 +7,108 @@ import Partners from '@/components/Partners.vue';
 
 const products = ref([])
 const isLoading = ref(true)
+const showNotification = ref(false);
 
 const repo: ProductRepository = new ProductRepository()
- 
 
 const getProducts = async () => {
-    products.value = await repo.getFiveProducts()
-    isLoading.value = false;
+  products.value = await repo.getFiveProducts()
+  isLoading.value = false;
 }
 
 onMounted(() => {
-    getProducts();
- });
+  getProducts();
+});
+
+const addToCart = (product) => {
+    console.log('Produit ajouté au panier :', product)
+}
+
+const addItemToCart = (product) => {
+  addToCart(product);
+  showNotification.value = true;
+
+  // la notification panier
+  setTimeout(() => {
+    showNotification.value = false;
+  }, 5000);
+}
 </script>
 
 <template>
-<div class="main-container">
+  <div class="main-container">
+    <div class="notification" v-if="showNotification">
+      Produit ajouté au panier !
+    </div>
+
     <div class="background">
-        <img class="image1" src="../assets/img/BleuGirl.png" alt="">
-        <img class="image2" src="../assets/img/Miku.png" alt="">
-        <div class="container-carousel">
-            <Carousel />
-        </div>
+      <img class="image1" src="../assets/img/BleuGirl.png" alt="">
+      <img class="image2" src="../assets/img/Miku.png" alt="">
+      <div class="container-carousel">
+        <Carousel />
+      </div>
     </div>
 
     <div class="container-news">
-        <h3>Nouveautés</h3>
-        <div class="container-cards">
-            <div class="card" v-for="product in products">
-                <div class="container-img">
-                    <router-link :to="`/products/${product['id']}`"><img :src="product['image']" alt=""></router-link>
-                </div>
-                <p>{{ product['name'] }}</p>
-                <p>{{ product['price'] }}€</p>
-                <Button>Ajouter au panier</Button>
-            </div> 
+      <h3>Nouveautés</h3>
+      <div class="container-cards">
+        <div class="card" v-for="product in products" :key="product.id">
+          <div class="container-img">
+            <router-link :to="`/products/${product['id']}`">
+              <img :src="product['image']" alt="">
+            </router-link>
+          </div>
+          <p>{{ product['name'] }}</p>
+          <p>{{ product['price'] }}€</p>
+          <Button @click="addItemToCart(product)">Ajouter au panier</Button>
         </div>
+      </div>
     </div>
 
-    
     <div class="parallax-effect-1">
-        <div class="container-line1">
-            <div class="lineBlue1"></div>
-            <div class="lineBlue2"></div>
-        </div>
-        <div class="container-line2">
-            <div class="lineBlue2"></div>
-            <div class="lineBlue1"></div> 
-        </div>
+      <div class="container-line1">
+        <div class="lineBlue1"></div>
+        <div class="lineBlue2"></div>
+      </div>
+      <div class="container-line2">
+        <div class="lineBlue2"></div>
+        <div class="lineBlue1"></div>
+      </div>
     </div>
 
     <div class="container-news">
-        <h3>Meilleures ventes</h3>
-        <div class="container-cards">
-            <div class="card" v-for="product in products">
-                <div class="container-img">
-                    <router-link to="#"><img :src="product['image']" alt=""></router-link>
-                </div>
-                <div class="product-details">
-                    <p>{{ product['name'] }}</p>
-                    <p>{{ product['price'] }}€</p>
-                    <Button>Ajouter au panier</Button>
-                </div>
-                
-            </div> 
+      <h3>Meilleures ventes</h3>
+      <div class="container-cards">
+        <div class="card" v-for="product in products">
+          <div class="container-img">
+            <router-link to="#">
+              <img :src="product['image']" alt="">
+            </router-link>
+          </div>
+          <div class="product-details">
+            <p>{{ product['name'] }}</p>
+            <p>{{ product['price'] }}€</p>
+            <Button @click="addItemToCart(product)">Ajouter au panier</Button>
+          </div>
         </div>
+      </div>
     </div>
-
     <Partners />
-</div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-
+.notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  z-index: 1;
+}
 .main-container {
     .background {
         background-image: url("../assets/img/Fond2.jpg");

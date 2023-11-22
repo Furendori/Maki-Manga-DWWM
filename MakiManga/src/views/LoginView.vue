@@ -113,10 +113,11 @@ label {
 
 input[type="email"],
 input[type="password"] {
-  width: 90%;
+  width: 80%;
+  height: 40px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 10px;
   background: gainsboro;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

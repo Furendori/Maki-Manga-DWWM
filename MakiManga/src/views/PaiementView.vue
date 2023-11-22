@@ -49,7 +49,6 @@ export default {
       console.log('Code promo invalide ou déjà appliqué');
   }
 },
-
     processPayment() {
     //paiement logique ici
     },

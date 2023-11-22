@@ -11,7 +11,6 @@ const corsOptions = {
 
 server.use(express.json());
 server.use(cors(corsOptions));
-server.use(bodyParser.json());
 
 server.listen(5500, () => {
     console.log("Serveur lancé");
