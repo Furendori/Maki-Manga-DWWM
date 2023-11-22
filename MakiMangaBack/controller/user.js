@@ -14,6 +14,23 @@ module.exports = {
         });
     },
 
+    findByEmail(req, res){
+        const email = req.params.email;
+        UserModel.findOne({email})
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({ error: 'Utilisateur non trouvé' });
+            }
+
+            // Renvoyez l'utilisateur
+            res.json({ user });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Erreur lors de la recherche de l\'utilisateur' });
+        });
+    },
+
     create(req, res) {
         const user = new UserModel({...req.body});
 

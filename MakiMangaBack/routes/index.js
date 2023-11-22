@@ -33,6 +33,10 @@ module.exports = server => {
         UserController.create(req, res);
     });
 
+    server.get("/users/:email", (req, res) => {
+        UserController.findByEmail(req, res);
+    });
+
     server.post("/users/:id", (req, res) => {
         UserController.update(req, res);
     })

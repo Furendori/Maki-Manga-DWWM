@@ -8,7 +8,9 @@ const repo: UserRepository = new UserRepository();
 let userEmail = ref("");
 let userPassword = ref("");
 let errorMessage = "";
-let success = false;
+let errorMessageMail = "";
+let errorMessagePassword = "";
+let loggedUser = ref();
 
 let login = async () => {
   try {
@@ -17,21 +19,31 @@ let login = async () => {
       return;
     }
 
-    const login = {
-      email: userEmail,
-      password: userPassword,
-    };
+    const response = await fetch("http://localhost:5500/users/" + userEmail.value, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const users = await response.json();
+    loggedUser.value = users.user;
 
-    if (userEmail !== login.email) {
-      errorMessage = "Identifiant invalide"
+    if (
+      users.error == "Utilisateur non trouvé" ||
+      userEmail.value != loggedUser.value.email
+    ) {
+      errorMessageMail = "Identifiant invalide";
+      console.log("id pas bon");
     } else {
-      if (userPassword !== login.password) {
-        errorMessage = "Mot de passe incorrect";
+      if (userPassword.value != loggedUser.value.password) {
+        console.log("mdp pas bon");
+
+        errorMessagePassword = "Mot de passe incorrect";
       } else {
-        router.push({ path : "/" })
+        router.push({ path: "/" });
       }
     }
-    
   } catch (error) {
     console.error("Erreur lors de la connexion", error);
     errorMessage = "Une erreur s'est produite. Veuillez réessayer";
@@ -65,6 +77,9 @@ let login = async () => {
               placeholder="Votre e-mail..."
             />
           </div>
+          <div class="errorMail">
+              {{ errorMessageMail }}
+            </div>
           <div class="form-group">
             <label for="password">Mot de passe *</label>
             <input
@@ -75,6 +90,9 @@ let login = async () => {
               required
               placeholder="Votre mot de passe..."
             />
+            <div class="errorPassword">
+              {{ errorMessagePassword }}
+            </div>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Se connecter</button>
@@ -103,6 +121,11 @@ div.login {
   align-items: center;
   justify-content: center;
   margin-top: 0;
+}
+
+.errormail {
+  color: #090a0f;
+  display: flex;
 }
 
 .login-header {
