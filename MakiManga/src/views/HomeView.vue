@@ -59,6 +59,8 @@ onMounted(() => {
         </div>
     </div>
 
+    <div class="transition01"></div>
+
     <div class="container-products">
         <h2>Meilleures ventes</h2>
         <Button class="lookmore">Voir tout</Button>
@@ -136,6 +138,7 @@ onMounted(() => {
         background-size: cover; 
         background-position: center;
         background-repeat: no-repeat;
+        border: 5px solid #1C2942;
     }
 
     .container-line2 {
@@ -163,13 +166,35 @@ onMounted(() => {
 
     .container-line1 {
         display: inline;
+        position: relative;
+
         .lineBlue1 {
             height: 50px;
             background-color: #1C2942;
-            opacity: 90%;
             rotate: 176deg;
             position: relative;
             top: -9;
+
+            &::after, &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: 0;
+                height: 0;
+                border-style: solid;
+            }
+
+            &::before {
+                left: 0;
+                border-width: 0 100vw 100px 0;
+                border-color: transparent #1C2942 transparent transparent;
+            }
+
+            &::after {
+                right: 0;
+                border-width: 100px 100vw 0 0;
+                border-color: transparent transparent transparent #1C2942;
+            }
         }
         .lineBlue2 {
             height: 50px;
@@ -178,8 +203,22 @@ onMounted(() => {
             rotate: 2deg;
             position: relative;
             top: -9px;
+
+            &::before {
+                left: 0;
+                border-width: 0 100vw 100px 0;
+                border-color: transparent #1C2942 transparent transparent;
+            }
+
+            &::after {
+                right: 0;
+                border-width: 100px 100vw 0 0;
+                border-color: transparent transparent transparent #1C2942;
+            }
         }
     }
+
+    
 }
     
 </style>

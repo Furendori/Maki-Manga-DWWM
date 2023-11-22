@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import '@splidejs/vue-splide/css';
-import Splide from '@splidejs/splide';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/splide/dist/css/themes/splide-default.min.css';
  
-// const splide = new Splide('.splide');
 
 const products = ref([
     {
@@ -19,22 +18,14 @@ const products = ref([
         image: "https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg"
     },
 ]);
-
-// onMounted(() => {
-  
-// })
-
 </script>
 
 <template>
-<!-- <Splide :options="{ rewind: true }" aria-label="My Favorite Images">
-    <SplideSlide>
-      <img src="image1.jpg" alt="Sample 1">
-    </SplideSlide>
-    <SplideSlide>
-      <img src="image2.jpg" alt="Sample 2">
-    </SplideSlide>
-  </Splide> -->
+  <splide>
+    <splide-slide v-for="product in products">
+      <img :src="product.image">
+    </splide-slide>
+  </splide>
 </template>
 
 <style scoped lang="scss">
