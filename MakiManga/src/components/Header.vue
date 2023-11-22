@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded',function(){
       <div class='menu-button'></div>
     </label>
     <ul class="menu">
-      <li><router-link to="/Search" @click="closeMenu">LICENCES</router-link></li>
+      <li><router-link to="/licences" @click="closeMenu">LICENCES</router-link></li>
       <li><router-link to="/products" @click="closeMenu">PRODUITS</router-link></li>
       <li><router-link to="/Contact" @click="closeMenu">CONTACT</router-link></li>
       <li><router-link to="/Panier" @click="closeMenu"><i class="fa-solid fa-bag-shopping fa-lg"
@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded',function(){
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #1C2942;
-  color: #FFF;
+  background-color: $primary-color;
+  color: $secondary-color;
   height: 130px;
   padding: 1em;
   font-size: 1.2rem;
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded',function(){
     padding: 5px;
     width: 50px;
     height: 50px;
-    background: #5FC2BA;
+    background: $tertiary-color;
     color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded',function(){
     height: 20px;
     margin: 0;
     padding: 0;
-    background: #5FC2BA;
+    background: $tertiary-color;
     color: rgb(255, 255, 255);
     font-size: 20px;
     border: none;
@@ -149,13 +149,13 @@ div#research {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #1C2942;
+    background-color: $primary-color;
   }
 
 
   .menu a {
     display: block;
-    color: white;
+    color: $secondary-color;
     text-decoration: none;
     padding: 1em;
   }
@@ -189,7 +189,7 @@ ul.menu {
 
 .menu-button, .menu-button::before, .menu-button::after {
   display: block;
-  background-color: #fff;
+  background-color: $secondary-color;
   position: absolute;
   height: 4px;
   width: 30px;
@@ -255,8 +255,8 @@ ul.menu {
     margin: 0;
     padding: 0.5em 0;
     width: 100%;
-    color: white;
-    background-color: #1C2942;
+    color: $secondary-color;
+    background-color: $primary-color;
   }
   .menu > li:not(:last-child) {
     border-bottom: 1px solid #000000;
