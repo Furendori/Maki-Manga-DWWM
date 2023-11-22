@@ -10,13 +10,10 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "@splidejs/splide": "^4.1.4",
-    "@splidejs/vue-splide": "^0.6.12",
     "esbuild": "^0.19.5",
     "esbuild-wasm": "^0.19.5",
     "pinia": "^2.1.7",
     "sass": "^1.69.5",
-    "swiper": "^11.0.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
