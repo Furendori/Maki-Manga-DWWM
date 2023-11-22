@@ -4,7 +4,7 @@ import { ProductRepository } from '@/repositories/ProductRepository';
 import type { ProductInterface } from '@/interfaces/ProductInterface';
 import Button from '@/components/Button.vue';
 import Carousel from '@/components/Carousel.vue';
-import Partners from '@/components/Partners.vue';
+import Universes from '@/components/Universes.vue';
 import ProductCard from '@/components/ProductCard.vue';
 
 const newProducts = ref<ProductInterface[]>([]);
@@ -68,7 +68,7 @@ onMounted(() => {
         </div>
     </div>
 
-    <Partners />
+    <Universes class="universes" />
 </div>
 </template>
 
