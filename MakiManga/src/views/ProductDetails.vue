@@ -38,12 +38,12 @@ onMounted(() => {
                     </div> 
                 </div>
                 <div class="description-product">
-                    <h5>Description</h5>
+                    <h3>Description</h3>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae accusantium placeat provident illo rerum modi id nostrum expedita eligendi autem? Obcaecati fugit modi eius cupiditate aliquid vero nostrum ea asperiores.
                         Suscipit maiores ipsa nam eveniet praesentium inventore enim quis voluptatibus possimus at! Itaque dolor nemo quae voluptas ex doloremque blanditiis accusantium impedit error quis nam ratione excepturi, dicta, magni porro?
                     </p>
-                    <p>{{ product.price }}€</p>
+                    <p class="product-price">{{ product.price }}€</p>
                     <Button>Ajouter au panier</Button> 
                 </div>
             </div>
@@ -89,6 +89,10 @@ onMounted(() => {
                 text-align: start;
                 margin: 15px;
                 width: 300px;
+
+                .product-price {
+                    font-size: 1.4rem;
+                }
             }
         }
 

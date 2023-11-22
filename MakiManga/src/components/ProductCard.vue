@@ -3,7 +3,7 @@ import Button from './Button.vue';
 
 const props = defineProps<{
     product: {
-        _id: string | number;
+        _id: string;
         name: string;
         price: number;
         image: string;
@@ -45,8 +45,8 @@ const props = defineProps<{
     margin: 10px;
   .content {
     .image-container{
-    width: 100%;
-    height: 300px;
+      width: 100%;
+      height: 300px;
 
       img {
         height: 300px;
@@ -57,6 +57,7 @@ const props = defineProps<{
     .card-content {
       display: flex;
       flex-direction: column;
+      text-align: center;
 
       h3 {
         margin: 0;
@@ -70,6 +71,7 @@ const props = defineProps<{
         margin: 0;
         color: #1C2942;
         margin-bottom: 5px;
+        font-size: 1.4rem;
       }
 
       Button {

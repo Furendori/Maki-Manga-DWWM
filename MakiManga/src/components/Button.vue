@@ -13,6 +13,7 @@
         padding: 10px 15px;
         border: none;
         cursor: pointer;
+        font-size: 1.2rem;
 
         &:hover {
           background-color: darken(#5FC2BA, 10);

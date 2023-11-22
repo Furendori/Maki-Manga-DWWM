@@ -1,5 +1,5 @@
 export interface ProductInterface {
-    id: string;
+    _id: string;
     name: string;
     image: string;
     licence: string;

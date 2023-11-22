@@ -7,8 +7,8 @@ import Carousel from '@/components/Carousel.vue';
 import Partners from '@/components/Partners.vue';
 import ProductCard from '@/components/ProductCard.vue';
 
-const newProducts = ref<ProductInterface>();
-const popularProduct =ref<ProductInterface>();
+const newProducts = ref<ProductInterface[]>([]);
+const popularProduct =ref<ProductInterface[]>([]);
 const isLoading = ref(true);
 
 const repo: ProductRepository = new ProductRepository();
@@ -41,10 +41,10 @@ onMounted(() => {
     </div>
 
     <div class="container-products">
-        <h3>Nouveautés</h3>
+        <h2>Nouveautés</h2>
         <Button class="lookmore">Voir tout</Button>
         <div class="container-cards">
-            <ProductCard :product="product" v-for="product in newProducts" :key="product.id"></ProductCard>
+            <ProductCard :product="product" v-for="product in newProducts" :key="product._id"></ProductCard>
         </div>
     </div>
 
@@ -61,10 +61,10 @@ onMounted(() => {
     </div>
 
     <div class="container-products">
-        <h3>Meilleures ventes</h3>
+        <h2>Meilleures ventes</h2>
         <Button class="lookmore">Voir tout</Button>
         <div class="container-cards">
-            <ProductCard :product="product" v-for="product in popularProduct" :key="product.id"></ProductCard>
+            <ProductCard :product="product" v-for="product in popularProduct" :key="product._id"></ProductCard>
         </div>
     </div>
 
