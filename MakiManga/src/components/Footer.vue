@@ -45,7 +45,7 @@ footer {
 
 p {
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 1.6rem;
 }
 
 a {

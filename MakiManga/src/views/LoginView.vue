@@ -1,50 +1,109 @@
-<script>
-export default {
-  methods: {
-    login() {
-      console.log('/login');
-    },
-    register() {
-      console.log('/register');
-      
-    },
-  },
+<script setup lang="ts">
+import router from "../router/index";
+import { ref } from "vue";
+import { UserRepository } from "../repositories/UserRepository";
+
+const repo: UserRepository = new UserRepository();
+
+let userEmail = ref("");
+let userPassword = ref("");
+let errorMessage = "";
+let errorMessageMail = "";
+let errorMessagePassword = "";
+let loggedUser = ref();
+
+let login = async () => {
+  try {
+    if (!userEmail.value || !userPassword.value) {
+      errorMessage = "Veuillez remplir les champs obligatoires.";
+      return;
+    }
+
+    const response = await fetch("http://localhost:5500/users/" + userEmail.value, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const users = await response.json();
+    loggedUser.value = users.user;
+
+    if (
+      users.error == "Utilisateur non trouvé" ||
+      userEmail.value != loggedUser.value.email
+    ) {
+      errorMessageMail = "Identifiant invalide";
+      console.log("id pas bon");
+    } else {
+      if (userPassword.value != loggedUser.value.password) {
+        console.log("mdp pas bon");
+
+        errorMessagePassword = "Mot de passe incorrect";
+      } else {
+        router.push({ path: "/" });
+      }
+    }
+  } catch (error) {
+    console.error("Erreur lors de la connexion", error);
+    errorMessage = "Une erreur s'est produite. Veuillez réessayer";
+  }
 };
 </script>
 
 <template>
   <div id="app">
     <div class="login-container">
-
       <div class="cloud">
-      <div id="stars"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
+        <div id="stars"></div>
+        <div id="stars2"></div>
+        <div id="stars3"></div>
       </div>
 
       <div class="login">
-        <img src="../assets/img/itachi.png" alt="" width="130">
+        <img src="../assets/img/itachi.png" alt="" width="130" />
         <div class="login-header">
           <h3>Connexion</h3>
         </div>
-        <form @submit="login">
+        <form @submit.prevent="login">
           <div class="form-group">
             <label for="email">E-mail *</label>
-            <input type="email" id="email" class="form-control" required placeholder="Votre e-mail...">
+            <input
+              type="email"
+              id="email"
+              v-model="userEmail"
+              class="form-control"
+              required
+              placeholder="Votre e-mail..."
+            />
           </div>
+          <div class="errorMail">
+              {{ errorMessageMail }}
+            </div>
           <div class="form-group">
             <label for="password">Mot de passe *</label>
-            <input type="password" id="password" class="form-control" required placeholder="Votre mot de passe...">
-          </div>
-          <div class="remember-me">
-            <input type="checkbox" id="checkbox">
-            <label for="checkbox">Se souvenir de moi</label>
+            <input
+              type="password"
+              id="password"
+              v-model="userPassword"
+              class="form-control"
+              required
+              placeholder="Votre mot de passe..."
+            />
+            <div class="errorPassword">
+              {{ errorMessagePassword }}
+            </div>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Se connecter</button>
           </div>
           <div class="no-register">
-            <p>Vous n'avez pas de compte ? <router-link to="./Register"><strong>S'inscrire.</strong></router-link></p>
+            <p>
+              Vous n'avez pas de compte ?
+              <router-link to="./Register"
+                ><strong>S'inscrire.</strong></router-link
+              >
+            </p>
           </div>
         </form>
       </div>
@@ -52,10 +111,7 @@ export default {
   </div>
 </template>
 
-<style>
-body {
-  margin: 0;
-}
+<style scoped>
 
 div.login {
   width: 900px;
@@ -65,7 +121,11 @@ div.login {
   align-items: center;
   justify-content: center;
   margin-top: 0;
+}
 
+.errormail {
+  color: #090a0f;
+  display: flex;
 }
 
 .login-header {
@@ -160,7 +220,7 @@ input[type="checkbox"] {
 @media only screen and (max-width: 768px) {
   div.login {
     width: 90%;
-    margin-top: 0; 
+    margin-top: 0;
   }
 }
 
@@ -182,14 +242,13 @@ div.login-container {
   position: relative;
 }
 
-
 /*--------------star animation--------------------*/
 #stars {
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    animation: animStar 50s linear infinite;
-    box-shadow: 779px 1331px #fff, 324px 42px #fff, 303px 586px #fff,
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  animation: animStar 50s linear infinite;
+  box-shadow: 779px 1331px #fff, 324px 42px #fff, 303px 586px #fff,
     1312px 276px #fff, 451px 625px #fff, 521px 1931px #fff, 1087px 1871px #fff,
     36px 1546px #fff, 132px 934px #fff, 1698px 901px #fff, 1418px 664px #fff,
     1448px 1157px #fff, 1084px 232px #fff, 347px 1776px #fff, 1722px 243px #fff,
@@ -368,13 +427,13 @@ div.login-container {
     696px 1654px #fff, 1144px 60px #fff;
 }
 #stars:after {
-    content: '';
-    position: absolute;
-    top: 2000px;
-    width: 1px;
-    height: 1px;
-    background: transparent;
-    box-shadow: 779px 1331px #fff, 324px 42px #fff, 303px 586px #fff,
+  content: "";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 779px 1331px #fff, 324px 42px #fff, 303px 586px #fff,
     1312px 276px #fff, 451px 625px #fff, 521px 1931px #fff, 1087px 1871px #fff,
     36px 1546px #fff, 132px 934px #fff, 1698px 901px #fff, 1418px 664px #fff,
     1448px 1157px #fff, 1084px 232px #fff, 347px 1776px #fff, 1722px 243px #fff,
@@ -553,11 +612,11 @@ div.login-container {
     696px 1654px #fff, 1144px 60px #fff;
 }
 #stars2 {
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    animation: animStar 100s linear infinite;
-    box-shadow: 1448px 320px #fff, 1775px 1663px #fff, 332px 1364px #fff,
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  animation: animStar 100s linear infinite;
+  box-shadow: 1448px 320px #fff, 1775px 1663px #fff, 332px 1364px #fff,
     878px 340px #fff, 569px 1832px #fff, 1422px 1684px #fff, 1946px 1907px #fff,
     121px 979px #fff, 1044px 1069px #fff, 463px 381px #fff, 423px 112px #fff,
     523px 1179px #fff, 779px 654px #fff, 1398px 694px #fff, 1085px 1464px #fff,
@@ -610,13 +669,13 @@ div.login-container {
     986px 1529px #fff, 1667px 1137px #fff;
 }
 #stars2:after {
-    content: '';
-    position: absolute;
-    top: 2000px;
-    width: 2px;
-    height: 2px;
-    background: transparent;
-    box-shadow: 1448px 320px #fff, 1775px 1663px #fff, 332px 1364px #fff,
+  content: "";
+  position: absolute;
+  top: 2000px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 1448px 320px #fff, 1775px 1663px #fff, 332px 1364px #fff,
     878px 340px #fff, 569px 1832px #fff, 1422px 1684px #fff, 1946px 1907px #fff,
     121px 979px #fff, 1044px 1069px #fff, 463px 381px #fff, 423px 112px #fff,
     523px 1179px #fff, 779px 654px #fff, 1398px 694px #fff, 1085px 1464px #fff,
@@ -669,11 +728,11 @@ div.login-container {
     986px 1529px #fff, 1667px 1137px #fff;
 }
 #stars3 {
-    width: 3px;
-    height: 3px;
-    background: transparent;
-    animation: animStar 150s linear infinte;
-    box-shadow: 387px 1878px #fff, 760px 1564px #fff, 1487px 999px #fff,
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  animation: animStar 150s linear infinte;
+  box-shadow: 387px 1878px #fff, 760px 1564px #fff, 1487px 999px #fff,
     948px 1828px #fff, 1977px 1001px #fff, 1284px 1963px #fff, 656px 284px #fff,
     1268px 1635px #fff, 1820px 598px #fff, 642px 1900px #fff, 296px 57px #fff,
     921px 1620px #fff, 476px 1858px #fff, 658px 613px #fff, 1171px 1363px #fff,
@@ -701,13 +760,13 @@ div.login-container {
     498px 1947px #fff, 617px 880px #fff, 240px 403px #fff;
 }
 #stars3:after {
-    content: '';
-    position: absolute;
-    top: 2000px;
-    width: 3px;
-    height: 3px;
-    background: transparent;
-    box-shadow: 387px 1878px #fff, 760px 1564px #fff, 1487px 999px #fff,
+  content: "";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 387px 1878px #fff, 760px 1564px #fff, 1487px 999px #fff,
     948px 1828px #fff, 1977px 1001px #fff, 1284px 1963px #fff, 656px 284px #fff,
     1268px 1635px #fff, 1820px 598px #fff, 642px 1900px #fff, 296px 57px #fff,
     921px 1620px #fff, 476px 1858px #fff, 658px 613px #fff, 1171px 1363px #fff,
@@ -736,13 +795,11 @@ div.login-container {
 }
 /* ---- Star Animation ---- */
 @keyframes animStar {
-    from {
-        transform: translateY(0px);
-    }
-    to {
-        transform: translateY(-2000px);
-    }
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
 }
-
-
 </style>

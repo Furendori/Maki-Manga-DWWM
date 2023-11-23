@@ -1,4 +1,4 @@
-export class BaseRepository {
+export abstract class BaseRepository {
     // Properties
     private host: string = "http://localhost:5500";
 
@@ -16,10 +16,18 @@ export class BaseRepository {
                     'Content-Type': 'application/json',
                 }; //{method: method, body: body, headers: {'Content-Type': 'application/json'}}
             }
+
             let response: Response = await fetch(this.host + path, options);
+            // const contentType = response.headers.get('Content-Type');
+
+            // if (contentType && contentType.includes('application/json')) {
+            //     return await response.json();
+            // } else {
+            //     return null
+            // }
             return await response.json();
         } catch (e) {
-            console.log(e);
+            console.log('Erreur dans la base repo',e);
         }
     }
 }

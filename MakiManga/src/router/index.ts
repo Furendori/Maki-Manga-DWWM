@@ -6,12 +6,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/Home.vue'),
+      component: () => import('../views/HomeView.vue')
     },
     {
       path: '/contact',
       name: 'contact',
-      component: () => import('../views/Contact.vue'),
+      component: () => import('../views/ContactView.vue')
     },
     {
       path: '/register',
@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/licenses',
       name: 'licenses',
-      component: () => import('../views/Licenses.vue'),
+      component: () => import('../views/LicensesView.vue')
     },
     {
       path: '/search',
@@ -36,22 +36,22 @@ const router = createRouter({
     {
       path: '/products',
       name: 'products',
-      component: () => import('../views/Products.vue'),
+      component: () => import('../views/ProductsView.vue')
     },
     {
       path: '/products/:id',
-      name: 'productDetails',
-      component: () => import('../views/ProductDetails.vue'),
+      name: 'product',
+      component: () => import('../views/ProductDetailsView.vue')
     },
     {
       path: '/myaccount',
       name: 'myaccount',
-      component: () => import('../views/MyAccount.vue'),
+      component: () => import('../views/MyAccountView.vue')
     },
     {
-      path: '/panier',
-      name: 'panier',
-      component: () => import('../views/PanierView.vue'),
+      path: '/Panier',
+      name: 'Panier',
+      component: () => import('../views/PanierView.vue')
     },
     {
       path: '/Paiement',
