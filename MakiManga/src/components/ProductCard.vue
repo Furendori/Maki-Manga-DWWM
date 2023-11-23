@@ -24,7 +24,7 @@ const props = defineProps<{
         </h3>
           <p>{{ product.price }}€</p>
         
-        <Button>Ajouter au panier</Button>
+        <Button >Ajouter au panier</Button>
       </div>
     </div>
   </div>
