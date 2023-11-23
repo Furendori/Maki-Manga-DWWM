@@ -21,6 +21,7 @@ module.exports = {
         text: `${body.objectSelect},
             ${body.name},
             ${body.text}`,
+            
     }).then((info) => {
         console.log("Message envoyé:" + info.messageId);
         res.status(200).send("Email envoyé avec succès !");

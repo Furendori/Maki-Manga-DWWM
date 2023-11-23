@@ -79,26 +79,29 @@ const sendEmail = async () => {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  font-family: 'Koulen', display;
-  color: #5FC2BA;
+  font-family: 'Bebas Neue', display;
+  color: $tertiary-color;
+  margin-bottom: 18px;
 
   h2 {
-    color: #1C2942;
+    color: $primary-color;
     margin-bottom: 0;
   }
 
   .container-form {
-    background-color: #1C2942;
+    background-color: $primary-color;
     padding: 20px;
     border-radius: 15px;
     position: relative;
     margin: 20px;
+    margin-bottom: 20px;
 
     img {
       height: 300px;
       position: absolute;
       left: 0;
       bottom: 0;
+      transform: translate(-10rem);
     }
 
     form {
@@ -114,11 +117,11 @@ const sendEmail = async () => {
 
       input:focus, select:focus {
         outline-width: 0;
-        border: 3px solid #5FC2BA;
+        border: 3px solid $tertiary-color;
       }
 
       textArea:focus {
-        outline-color: #5FC2BA;
+        outline-color: $tertiary-color;
       }
 
       Button {

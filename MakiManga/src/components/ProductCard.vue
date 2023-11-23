@@ -59,13 +59,13 @@ const props = defineProps<{
         margin: 0;
         a {
           text-decoration: none;
-          color: #1C2942;
+          color: $primary-color;
         }
       }
 
       p {
         margin: 0;
-        color: #1C2942;
+        color: $primary-color;
         margin-bottom: 5px;
         font-size: 1.4rem;
       }

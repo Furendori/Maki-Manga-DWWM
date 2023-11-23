@@ -1,69 +1,76 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import '@splidejs/vue-splide/css';
-import Splide from '@splidejs/splide';
- 
-// const splide = new Splide('.splide');
-
-const products = ref([
-    {
-        image: "https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg"
-    },
-    {
-        image: "https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg"
-    },
-    {
-        image: "https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg"
-    },
-    {
-        image: "https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg"
-    },
-]);
-
-// onMounted(() => {
-  
-// })
-
+import Button from './Button.vue';
 </script>
 
 <template>
-<!-- <Splide :options="{ rewind: true }" aria-label="My Favorite Images">
-    <SplideSlide>
-      <img src="image1.jpg" alt="Sample 1">
-    </SplideSlide>
-    <SplideSlide>
-      <img src="image2.jpg" alt="Sample 2">
-    </SplideSlide>
-  </Splide> -->
+  <div class="container-carousel">
+    <div class="container-img">
+      <img src="https://www.manga-news.com/public/images/series/Les_Carnets_de_l_Apothicaire_1.jpg" alt="">
+    </div>
+
+    <div class="content-carousel">
+      <h2>Les carnets de l'apothicaire</h2>
+      <p>Regarder l'animé sur Crunchyroll, de nouveaux épisodes chaque samedi à 19h45 !</p>
+      <h3>Résumé</h3>
+      <p>Formée dès son plus jeune âge par son père apothicaire, 
+        Mao Mao est un jour vendue comme servante au palais de l'empereur. 
+        Prisonnière dans les arcanes du pouvoir, elle attire l’attention de Jinshi, 
+        un séduisant haut fonctionnaire qui la promeut lorsqu’il découvre 
+        son talent pour confectionner des potions. 
+        Désormais goûteuse, Mao Mao met ses connaissances au service des gens du palais pour les soigner, 
+        mais aussi pour déjouer les mystères et les complots qui se trament…
+      </p>
+      <Button>Voir les produits associés</Button>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
+.container-carousel {
   display: flex;
   align-items: center;
-  margin-left: 35px;
-}
-
-.SplideSlide img {
+  flex-wrap: nowrap;
+  height: 80%;
+  width: 900px;
+  background-color: $primary-color;
+  border-radius: 15px;
+  padding: 15px;
   display: flex;
-  object-fit: cover;
-  height: 556px;
-  width: 800px;
-}
+  align-items: center;
+  justify-content: center;
 
-.carousel-product {
-    border-radius: 15px;
-    background-color: transparent;
-}
+  .container-img {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    img {
+      height: 500px;
+      object-fit: cover;
+    }
+  }
+
+  .content-carousel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $secondary-color;
+    align-self: flex-start;
+    height: 100%;
+    margin-left: 10px;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    Button {
+      align-self: flex-end;
+    }
+  }
+ }
 </style>
 

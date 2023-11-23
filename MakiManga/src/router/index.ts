@@ -24,9 +24,9 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue'),
     },
     {
-      path: '/licenses',
-      name: 'licenses',
-      component: () => import('../views/LicensesView.vue')
+      path: '/licences',
+      name: 'licences',
+      component: () => import('../views/LicencesView.vue')
     },
     {
       path: '/search',

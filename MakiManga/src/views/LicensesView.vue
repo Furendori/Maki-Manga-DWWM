@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>Les licenses</h2>
+  <h2>Les licences</h2>
   <div class="main-container" v-for="manga in mangas">
     <div class="mangas-infos">
       <img :src="manga['image']" alt="" />
@@ -31,7 +31,8 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.main-container {
+.mangas-infos {
   display: flex;
+  flex-direction: row;
 }
 </style>

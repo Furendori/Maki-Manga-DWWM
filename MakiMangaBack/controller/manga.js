@@ -2,14 +2,14 @@ const MangaModel = require("../models/manga");
 
 module.exports = {
     getAll(req, res) {
-        MangaModel.find().then(mangas => {
+        MangaModel.find().then((mangas) => {
             res.send(mangas);
         });
     },
 
     get(req, res) {
         const id = req.params.id;
-        MangaModel.findById(id).then(manga => {
+        MangaModel.findOne({ _id: id }).then(manga => {
             res.send(manga);
         });
     },
