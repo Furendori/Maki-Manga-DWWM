@@ -1,10 +1,21 @@
 <script setup lang="ts">
 import type { ProductInterface } from '@/interfaces/ProductInterface';
 import Button from './Button.vue';
+import { useCounterStore } from '../stores/counter';
+import { onMounted } from 'vue';
+
 
 const props = defineProps<{
     product: ProductInterface
 }>();
+
+const counterStore = useCounterStore();
+
+const addToCart = () => {
+    if (product.value) {
+        counterStore.addToCart(product.value);
+    }
+}
 
 </script>
 
@@ -24,7 +35,7 @@ const props = defineProps<{
         </h3>
           <p>{{ product.price }}€</p>
         
-        <Button >Ajouter au panier</Button>
+          <Button @click="addToCart">Ajouter au panier</Button>
       </div>
     </div>
   </div>

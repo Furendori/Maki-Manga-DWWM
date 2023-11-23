@@ -4,13 +4,14 @@ import { ref, onMounted } from 'vue';
 import { ProductRepository } from '@/repositories/ProductRepository';
 import type { ProductInterface } from '@/interfaces/ProductInterface';
 import Button from '@/components/Button.vue';
+import { useCounterStore } from '../stores/counter'; 
 
 const route = useRoute();
 const product = ref<ProductInterface>();
 const isLoading = ref(true);
 const productId: string = route.params.id as string;
 const repo: ProductRepository = new ProductRepository();
-
+const counterStore = useCounterStore(); 
 const getProduct = async () => {
     try {
         product.value = await repo.getProduct(productId);
@@ -20,10 +21,17 @@ const getProduct = async () => {
     }
 }
 
+const addToCart = () => {
+    if (product.value) {
+        counterStore.addToCart(product.value);
+    }
+}
 
 onMounted(() => {
     getProduct();
- });
+});
+
+
 </script>
 
 <template>
@@ -44,7 +52,7 @@ onMounted(() => {
                         Suscipit maiores ipsa nam eveniet praesentium inventore enim quis voluptatibus possimus at! Itaque dolor nemo quae voluptas ex doloremque blanditiis accusantium impedit error quis nam ratione excepturi, dicta, magni porro?
                     </p>
                     <p class="product-price">{{ product.price }}€</p>
-                    <Button>Ajouter au panier</Button> 
+                    <Button @click="addToCart">Ajouter au panier</Button>
                 </div>
             </div>
         </div>

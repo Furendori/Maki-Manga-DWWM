@@ -1,16 +1,17 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
+import type { ProductInterface } from '@/interfaces/ProductInterface';
 
 export const useCounterStore = defineStore('counter', () => {
   const count = ref(0);
   const doubleCount = computed(() => count.value * 2);
-  const cart = ref([]);
+  const cart = ref<ProductInterface[]>([]);
 
   function increment() {
     count.value++;
   }
 
-  function addToCart(product) {
+  function addToCart(product: ProductInterface) {
     cart.value.push(product);
   }
 
