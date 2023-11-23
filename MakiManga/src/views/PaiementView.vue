@@ -1,9 +1,13 @@
 <script>
+import { useCounterStore } from '../stores/counter';
+const { cart, removeFromCart, clearCart, total } = useCounterStore();
+
 export default {
   data() {
     return {
       loggedIn: false,
       lastName: '',
+      email: '',
       address: '',
       apartment: '',
       postalCode: '',
@@ -11,16 +15,23 @@ export default {
       phone: '',
       saveAddress: false,
       sendOffers: false,
-      cartItems: [
-        { name: 'Nom figurine', price: 20 },
-      ],
       deliveryCost: 3,
       promoCode: '',
+      promoApplied: false,
       paymentInfo: {
         cardNumber: '',
         expiryDate: '',
         ccv: '',
       },
+      cartItems: [
+        {
+          id: 1,
+          name: 'Produit 1',
+          image: '/path/to/maki-image.jpg',
+          price: 69,
+          quantity: 1,
+        }
+      ],
     };
   },
   methods: {
@@ -29,6 +40,9 @@ export default {
         this.deliveryCost = 0;
       }
     },
+    removeItem(index) {
+      removeFromCart(index);
+    },
     calculateSubtotal() {
       return this.cartItems.reduce((total, item) => total + item.price, 0);
     },
@@ -36,25 +50,23 @@ export default {
       return this.calculateSubtotal() + this.deliveryCost;
     },
     applyPromoCode() {
-    if (!this.promoApplied && this.promoCode === 'MAKI10') {
-      console.log('Code promo appliqué :', this.promoCode);
-      const discountPercentage = 0.10;
-      const discountAmount = this.calculateSubtotal() * discountPercentage;
-      this.cartItems = this.cartItems.map(item => ({
-        ...item,
-        price: item.price - discountAmount,
-      }));
-      this.promoApplied = true;
-    } else {
-      console.log('Code promo invalide ou déjà appliqué');
-  }
-},
-    processPayment() {
-    //paiement logique ici
+      if (!this.promoApplied && this.promoCode === 'MAKI10') {
+        console.log('Code promo appliqué :', this.promoCode);
+        const discountPercentage = 0.10;
+        const discountAmount = this.calculateSubtotal() * discountPercentage;
+        this.cartItems = this.cartItems.map(item => ({
+          ...item,
+          price: item.price - discountAmount,
+        }));
+        this.promoApplied = true;
+      } else {
+        console.log('Code promo invalide ou déjà appliqué');
+      }
     },
   },
 };
 </script>
+
 
 
 <template>
@@ -103,38 +115,38 @@ export default {
           </div>
 
          
-        </div> 
-        
-          
+        </div>
           <button type="submit" @click="processPayment">Valider</button>
           <h5>Paiement sécurisé</h5>
           <img src="../assets/img/logo-cart.png" alt="" width="150">
       </div>
 
       <!-- separateur -->
-      <div class="separateur"></div>
+              <div class="separateur"></div>
 
-      <div class="cart-paiement-container">
-        <div class="cart-container">
-          <h2>Votre Panier</h2>
-          <ul>
-            <li v-for="(item, index) in cartItems" :key="index">
+              <div class="cart-container">
+        <h2>Votre Panier</h2>
+        <ul>
+          <li v-for="(item, index) in cartItems" :key="index">
+            <div>
+              <img :src="item.image" alt="Product Image" style="width: 100px; height: 130px;">
               {{ item.name }} - {{ item.price }} €
-            </li>
-          </ul>
-          <div class="subtotal">Sous-total : {{ calculateSubtotal() }} €</div>
-          <div class="delivery">Livraison : {{ deliveryCost }} €</div>
-          <div class="total">Total à payer : {{ calculateTotal() }} €</div>
-          </div>
-          <div class="promo-code">
-            <label for="promoCode"></label>
-            <input type="text" id="promoCode" v-model="promoCode" placeholder="Code promo...">
-            <button @click="applyPromoCode">Appliquer</button>
-          </div>
+            </div>
+          </li>
+        </ul>
+        <div class="subtotal">Sous-total : {{ calculateSubtotal() }} €</div>
+        <div class="delivery">Livraison : {{ deliveryCost }} €</div>
+        <div class="total">Total à payer : {{ calculateTotal() }} €</div>
+
+        <div class="promo-code">
+          <label for="promoCode"></label>
+          <input type="text" id="promoCode" v-model="promoCode" placeholder="Code promo...">
+          <button @click="applyPromoCode">Appliquer</button>
+        </div>
       </div>
-    </div>
-    <h4>Merci de votre confiance.</h4>
-  </div>
+        </div>
+        <h4>Merci de votre confiance.</h4>
+        </div>
 </template>
 
 <style scoped>
@@ -165,13 +177,10 @@ h1 {
 
 .cart-paiement-container {
   display: flex;
-  width: 30%;
+  width: 40%;
 }
 
-.cart-container,
-.paiement-container {
-  width: 100%;
-}
+
 .paiement-container {
   display: flex;
   flex-direction: column;
@@ -239,7 +248,7 @@ button {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   padding: 20px;
   display: flex;
-  width: 70%;
+  width: 60%;
 }
 
 @media screen and (max-width: 600px) {

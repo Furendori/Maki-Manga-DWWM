@@ -52,7 +52,6 @@ module.exports = {
   searchProducts(req, res) {
     const { query } = req.query;
 
-    // expression régulière pour effectuer une recherche insensible à la casse
     ProductModel.find({ name: { $regex: new RegExp(query, "i") } })
       .then((products) => {
         res.json(products);

@@ -6,69 +6,59 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/Home.vue')
+      component: () => import('../views/Home.vue'),
     },
     {
       path: '/contact',
       name: 'contact',
-      component: () => import('../views/Contact.vue')
+      component: () => import('../views/Contact.vue'),
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('../views/RegisterView.vue')
+      component: () => import('../views/RegisterView.vue'),
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/LoginView.vue'),
     },
     {
       path: '/licenses',
       name: 'licenses',
-      component: () => import('../views/Licenses.vue')
+      component: () => import('../views/Licenses.vue'),
     },
     {
       path: '/search',
       name: 'search',
-      component: () => import('../views/SearchView.vue')
+      component: () => import('../views/SearchView.vue'),
     },
     {
       path: '/products',
-      name: 'product',
-      component: () => import('../views/Products.vue')
+      name: 'products',
+      component: () => import('../views/Products.vue'),
     },
     {
       path: '/products/:id',
-      name: 'product',
-      component: () => import('../views/ProductDetails.vue')
+      name: 'productDetails',
+      component: () => import('../views/ProductDetails.vue'),
     },
     {
       path: '/myaccount',
       name: 'myaccount',
-      component: () => import('../views/MyAccount.vue')
+      component: () => import('../views/MyAccount.vue'),
     },
     {
-      path: '/products',
-      name: 'product',
-      component: () => import('../views/Products.vue')
-    },
-    {
-      path: '/products/:id',
-      name: 'product',
-      component: () => import('../views/ProductDetails.vue')
-    },
-    {
-      path: '/Panier',
-      name: 'Panier',
-      component: () => import('../views/PanierView.vue')
+      path: '/panier',
+      name: 'panier',
+      component: () => import('../views/PanierView.vue'),
     },
     {
       path: '/Paiement',
       name: 'Paiement',
-      component: () => import('../views/PaiementView.vue')
+      component: () => import('../views/PaiementView.vue'),
     }
-  ]
-})
+  ],
+});
 
-export default router
+export default router;

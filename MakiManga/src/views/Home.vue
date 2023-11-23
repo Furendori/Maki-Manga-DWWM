@@ -1,39 +1,38 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { ProductRepository } from '../repositories/ProductRepository'
-import Carousel from '@/components/Carousel.vue'
-import Button from '../components/Button.vue'
+import { ref, onMounted } from 'vue';
+import { ProductRepository } from '../repositories/ProductRepository';
+import Carousel from '@/components/Carousel.vue';
+import Button from '../components/Button.vue';
 import Partners from '@/components/Partners.vue';
+import { useCounterStore } from '../stores/counter';
 
-const products = ref([])
-const isLoading = ref(true)
+const { addToCart } = useCounterStore();
+const products = ref([]);
+const isLoading = ref(true);
 const showNotification = ref(false);
-
-const repo: ProductRepository = new ProductRepository()
+const cart = ref([]);
+const repo = new ProductRepository();
 
 const getProducts = async () => {
-  products.value = await repo.getFiveProducts()
+  products.value = await repo.getFiveProducts();
   isLoading.value = false;
-}
+};
 
 onMounted(() => {
   getProducts();
+  showNotification.value = false;
 });
-
-const addToCart = (product) => {
-    console.log('Produit ajouté au panier :', product)
-}
 
 const addItemToCart = (product) => {
   addToCart(product);
   showNotification.value = true;
 
-  // la notification panier
   setTimeout(() => {
     showNotification.value = false;
   }, 5000);
-}
+};
 </script>
+
 
 <template>
   <div class="main-container">
@@ -45,7 +44,7 @@ const addItemToCart = (product) => {
       <img class="image1" src="../assets/img/BleuGirl.png" alt="">
       <img class="image2" src="../assets/img/Miku.png" alt="">
       <div class="container-carousel">
-        <Carousel />
+        <Carousel @addItemToCart="addItemToCart" :cart="cart" />
       </div>
     </div>
 
@@ -54,12 +53,12 @@ const addItemToCart = (product) => {
       <div class="container-cards">
         <div class="card" v-for="product in products" :key="product.id">
           <div class="container-img">
-            <router-link :to="`/products/${product['id']}`">
-              <img :src="product['image']" alt="">
+            <router-link :to="`/products/${product.id}`">
+              <img :src="product.image" alt="">
             </router-link>
           </div>
-          <p>{{ product['name'] }}</p>
-          <p>{{ product['price'] }}€</p>
+          <p>{{ product.name }}</p>
+          <p>{{ product.price }}€</p>
           <Button @click="addItemToCart(product)">Ajouter au panier</Button>
         </div>
       </div>
@@ -82,12 +81,12 @@ const addItemToCart = (product) => {
         <div class="card" v-for="product in products">
           <div class="container-img">
             <router-link to="#">
-              <img :src="product['image']" alt="">
+              <img :src="product.image" alt="">
             </router-link>
           </div>
           <div class="product-details">
-            <p>{{ product['name'] }}</p>
-            <p>{{ product['price'] }}€</p>
+            <p>{{ product.name }}</p>
+            <p>{{ product.price }}€</p>
             <Button @click="addItemToCart(product)">Ajouter au panier</Button>
           </div>
         </div>
@@ -96,6 +95,7 @@ const addItemToCart = (product) => {
     <Partners />
   </div>
 </template>
+
 
 <style scoped lang="scss">
 .notification {
