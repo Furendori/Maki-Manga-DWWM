@@ -12,6 +12,8 @@ const isLoading = ref(true);
 const productId: string = route.params.id as string;
 const repo: ProductRepository = new ProductRepository();
 const counterStore = useCounterStore(); 
+const notification = ref<string | null>(null);
+
 const getProduct = async () => {
     try {
         product.value = await repo.getProduct(productId);
@@ -24,21 +26,24 @@ const getProduct = async () => {
 const addToCart = () => {
     if (product.value) {
         counterStore.addToCart(product.value);
+        notification.value = `${product.value.name} a été ajouté au panier!`;
+        // Clear the notification after a delay (e.g., 3 seconds)
+        setTimeout(() => {
+            notification.value = null;
+        }, 3000);
     }
 }
 
 onMounted(() => {
     getProduct();
 });
-
-
 </script>
 
 <template>
     <div class="main-container">
         <div v-if="product" class="product-container">
             <h2>Figurine {{ product.name }} - {{ product.licence }}</h2>
-            <div  class="product-details">
+            <div class="product-details">
                 <div class="container-img">
                     <img v-if="product.image !== undefined" :src="product.image" :alt="product.name">
                     <div v-else>
@@ -55,6 +60,7 @@ onMounted(() => {
                     <Button @click="addToCart">Ajouter au panier</Button>
                 </div>
             </div>
+            <div v-if="notification" class="notification">{{ notification }}</div>
         </div>
 
         <div v-else>
@@ -64,6 +70,17 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+.notification {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+    border-radius: 8px;
+}
 .main-container{
     display: flex;
     align-items: center;

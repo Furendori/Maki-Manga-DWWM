@@ -1,47 +1,61 @@
 <script setup lang="ts">
 import type { ProductInterface } from '@/interfaces/ProductInterface';
+import { defineProps, ref } from 'vue';
 import Button from './Button.vue';
 import { useCounterStore } from '../stores/counter';
-import { onMounted } from 'vue';
-
 
 const props = defineProps<{
     product: ProductInterface
 }>();
 
 const counterStore = useCounterStore();
+const notification = ref<string | null>(null); 
 
 const addToCart = () => {
-    if (product.value) {
-        counterStore.addToCart(product.value);
+    if (props.product) {
+        counterStore.addToCart(props.product);
+        notification.value = `${props.product.name} a été ajouté au panier!`;
+        setTimeout(() => {
+            notification.value = null;
+        }, 3000);
     }
 }
-
 </script>
 
 <template>
   <div class="card">
     <div class="content">
       <div class="image-container">
-        <RouterLink :to="`/products/${product._id.toString()}`">
-          <img :src="product.image" :alt="product.name" />
+        <RouterLink :to="`/products/${props.product._id.toString()}`">
+          <img :src="props.product.image" :alt="props.product.name" />
         </RouterLink>
       </div>
       <div class="card-content">
         <h3>
-          <RouterLink :to="`/products/${product._id.toString()}`">
-            {{ product.name }}
+          <RouterLink :to="`/products/${props.product._id.toString()}`">
+            {{ props.product.name }}
           </RouterLink>
         </h3>
-          <p>{{ product.price }}€</p>
-        
-          <Button @click="addToCart">Ajouter au panier</Button>
+        <p>{{ props.product.price }}€</p>
+        <Button @click="addToCart">Ajouter au panier</Button>
       </div>
     </div>
+    <div v-if="notification" class="notification">{{ notification }}</div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.notification {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1;
+    border-radius: 8px;
+}
 .card {
     display: flex;
     justify-content: center;

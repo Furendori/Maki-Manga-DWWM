@@ -17,14 +17,21 @@ export const useCounterStore = defineStore('counter', () => {
 
   function removeFromCart(index) {
     cart.value.splice(index, 1);
+    const removedItem = cart.value.splice(index, 1)[0];
+    const updatedTotal = total.value - removedItem.price;
+    total.value = updatedTotal;
   }
 
   function clearCart() {
     cart.value = [];
   }
 
+   
+
+
   const total = computed(() => {
     return cart.value.reduce((total, item) => total + item.price, 0);
+    
   });
 
   return { count, doubleCount, increment, cart, addToCart, removeFromCart, clearCart, total };
