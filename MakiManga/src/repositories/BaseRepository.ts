@@ -18,7 +18,11 @@ export abstract class BaseRepository {
             }
 
             let response: Response = await fetch(this.host + path, options);
-    
+            
+            if (!response.ok) {
+                return response;
+            }
+
             return await response.json();
         } catch (error) {
             console.log('Erreur dans la base repo',error);

@@ -11,10 +11,10 @@ module.exports = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                return res.status(404).json({ message: "Aucun utilisateur n'a été trouvé"});
+                return res.status(404).json({ message: "Aucun utilisateur n'a été trouvé"});ù
             }
 
-            const passwordMatch = await user.comparePassword(password);
+            const passwordMatch = await bcrypt.compare(password, user.password);
             if (!passwordMatch) {
                 return res.status(401).json({ message: "Les identifiants sont incorrects"});
             }

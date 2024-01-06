@@ -1,54 +1,71 @@
 <script setup lang="ts">
 import router from "../router/index";
 import { ref } from "vue";
-import { UserRepository } from "../repositories/UserRepository";
+import { LoginRepository } from "../repositories/LoginRepository";
 
-const repo: UserRepository = new UserRepository();
+const repo: LoginRepository = new LoginRepository();
 
 let userEmail = ref("");
 let userPassword = ref("");
-let errorMessage = "";
+let errorMessage = ref("");
 let errorMessageMail = "";
 let errorMessagePassword = "";
 let loggedUser = ref();
 
-let login = async () => {
-  try {
-    if (!userEmail.value || !userPassword.value) {
-      errorMessage = "Veuillez remplir les champs obligatoires.";
-      return;
-    }
+// let login = async () => {
+//   try {
+//     if (!userEmail.value || !userPassword.value) {
+//       errorMessage = "Veuillez remplir les champs obligatoires.";
+//       return;
+//     }
 
-    const response = await fetch("http://localhost:5500/users/" + userEmail.value, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const users = await response.json();
-    loggedUser.value = users.user;
+//     const response = await fetch("http://localhost:5500/users/" + userEmail.value, {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+//     const users = await response.json();
+//     loggedUser.value = users.user;
 
-    if (
-      users.error == "Utilisateur non trouvé" ||
-      userEmail.value != loggedUser.value.email
-    ) {
-      errorMessageMail = "Identifiant invalide";
-      console.log("id pas bon");
-    } else {
-      if (userPassword.value != loggedUser.value.password) {
-        console.log("mdp pas bon");
+//     if (
+//       users.error == "Utilisateur non trouvé" ||
+//       userEmail.value != loggedUser.value.email
+//     ) {
+//       errorMessageMail = "Identifiant invalide";
+//       console.log("id pas bon");
+//     } else {
+//       if (userPassword.value != loggedUser.value.password) {
+//         console.log("mdp pas bon");
 
-        errorMessagePassword = "Mot de passe incorrect";
-      } else {
-        router.push({ path: "/" });
-      }
-    }
-  } catch (error) {
-    console.error("Erreur lors de la connexion", error);
-    errorMessage = "Une erreur s'est produite. Veuillez réessayer";
+//         errorMessagePassword = "Mot de passe incorrect";
+//       } else {
+//         router.push({ path: "/" });
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Erreur lors de la connexion", error);
+//     errorMessage = "Une erreur s'est produite. Veuillez réessayer";
+//   }
+// };
+
+const login = async () => {
+  if (!userEmail.value || !userPassword.value) {
+    errorMessage.value = "Veuillez remplir les champs avec vos identifiants";
+    return;
   }
-};
+
+  try {
+    await repo.login({email: userEmail.value, password: userPassword.value});
+  } catch (error) {
+    if (error instanceof Error) {
+     errorMessage.value = error.message;
+    } else {
+     errorMessage.value = "Une erreur est survenue, réessayez plus tard";
+    }
+  }
+}
 </script>
 
 <template>
@@ -92,7 +109,7 @@ let login = async () => {
               placeholder="Votre mot de passe..."
             />
             <div class="errorPassword">
-              {{ errorMessagePassword }}
+              {{ errorMessage }}
             </div>
           </div>
 

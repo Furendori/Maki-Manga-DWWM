@@ -15,7 +15,7 @@ server.use(cors(corsOptions));
 server.listen(5500, () => {
     console.log("Serveur lancé");
 
-    mongoose.connect("mongodb://127.0.0.1/MakiManga");
+    mongoose.connect("mongodb://127.0.0.1/makimanga");
 
     const db = mongoose.connection;
 
