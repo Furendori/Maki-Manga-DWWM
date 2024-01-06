@@ -20,7 +20,7 @@ module.exports = {
             res.send({
                 response: `Création du manga ${manga.name} effectué avec succès`
             });
-        }).catch((e) => console.log(e.toString()));
+        }).catch((error) => console.log(error.toString()));
     },
 
     update(req, res) {

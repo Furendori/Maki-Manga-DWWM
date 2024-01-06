@@ -1,4 +1,5 @@
 const UserModel = require("../models/user");
+const bcrypt = require("bcrypt");
 
 module.exports = {
     getAll(req, res) {
@@ -27,18 +28,38 @@ module.exports = {
         })
         .catch(err => {
             console.error(err);
-            res.status(500).json({ error: 'Erreur lors de la recherche de l\'utilisateur' });
+            res.status(500).json({ error: "Erreur lors de la recherche de l'utilisateur" });
         });
     },
 
-    create(req, res) {
-        const user = new UserModel({...req.body});
+   async create(req, res) {
+        const {firstName, lastName, email, password }= req.body;
 
-        user.save().then(() => {
-            res.send({
-                response: `Création du compte ${user.firstName} créé avec succès`
-            });
-        }).catch((error) => console.log(error.toString()));
+        try {
+            const existingUser = await UserModel.findOne({ email : email });
+
+            if (existingUser) {
+                return res.status(400).json({message: "Il y a déjà un compte existant avec cette adresse mail"});
+            }
+
+            if (password) {
+                
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            const user = new UserModel({...req.body, password: hashedPassword});
+
+            user.save().then(() => {
+                res.send({
+                    response: `Création du compte ${user.firstName} ${user.lastName} créé avec succès`
+                });
+            }).catch((error) => console.log(error.toString()));
+            
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({message: "Quelque chose ne fonctionne pas"});
+        }
     },
 
     update(req, res) {
@@ -52,20 +73,27 @@ module.exports = {
         }
     },
 
-    login: async(req, res) => {
-        const {email, password} = req.body;
-
-        try {
-            const user = await UserModel.findOne({email, password});
-
-            if (!user) {
-                return res.status(401).json({success : false, message : 'Internal email or password'})
-            }
-
-            res.json({success : true, message : 'login successful'});
-        } catch (error) {
-            console.error('Error during login:', error);
-            res.status(500).json({success : false, message : 'Internal server error'})
-        }
+    delete(req, res) {
+        const id = req.params.id;
+        UserModel.findById(id).then(user => {
+            res.delete(user);
+        });
     }
+
+    // login: async(req, res) => {
+    //     const {email, password} = req.body;
+
+    //     try {
+    //         const user = await UserModel.findOne({email, password});
+
+    //         if (!user) {
+    //             return res.status(401).json({success : false, message : 'Internal email or password'})
+    //         }
+
+    //         res.json({success : true, message : 'login successful'});
+    //     } catch (error) {
+    //         console.error('Error during login:', error);
+    //         res.status(500).json({success : false, message : 'Internal server error'})
+    //     }
+    // }
 }

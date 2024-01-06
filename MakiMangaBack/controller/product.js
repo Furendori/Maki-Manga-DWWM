@@ -4,7 +4,7 @@ module.exports = {
   getAll(req, res) {
     ProductModel.find().then((products) => {
       res.send(products);
-    });
+    })
   },
 
   get(req, res) {

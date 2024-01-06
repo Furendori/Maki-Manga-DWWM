@@ -24,7 +24,6 @@ let registerUserData = async () => {
       !userLastName.value ||
       !userPassword.value ||
       !userPasswordConfirm.value ||
-      !userPhone.value ||
       !userEmail.value
     ) {
       errorMessage = "Veuillez remplir les champs obligatoires.";
@@ -45,6 +44,7 @@ let registerUserData = async () => {
     });
 
     router.push({ path: "/" });
+
   } catch (error) {
     console.error("Erreur lors de l'envoi de la requête", error);
   }
@@ -82,9 +82,10 @@ let registerUserData = async () => {
           required
         />
         <span class="error-message">{{ errorMessage }}</span>
-        <span v-if="!passwordsMatch" class="error-message"
-          >Les mots de passe ne correspondent pas.</span
-        >
+
+        <span v-if="!passwordsMatch" class="error-message">
+          Les mots de passe ne correspondent pas.
+        </span>
         
         <label for="phone">Numéro de téléphone :</label>
         <input type="tel" id="phone" v-model="userPhone" />
@@ -95,11 +96,11 @@ let registerUserData = async () => {
           id="termsConditions"
           required
         />
-        <label for="termsConditions" class="terms-check"
-          >J'ai lu et j'accepte les termes et conditions</label
-        >
+        <label for="termsConditions" class="terms-check">
+          J'ai lu et j'accepte les termes et conditions
+        </label>
 
-        <input class="submit-btn" type="submit" value="Envoyer" />
+        <input class="submit-btn" type="submit" value="S'inscrire" />
       </div>
     </div>
   </form>
@@ -184,6 +185,7 @@ form {
   border-radius: 15px;
   color: white;
   background-color: #1c2942;
+  cursor: pointer;
 }
 
 .remi {

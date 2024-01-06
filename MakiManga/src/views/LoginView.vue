@@ -79,7 +79,8 @@ let login = async () => {
           </div>
           <div class="errorMail">
               {{ errorMessageMail }}
-            </div>
+          </div>
+
           <div class="form-group">
             <label for="password">Mot de passe *</label>
             <input
@@ -94,15 +95,17 @@ let login = async () => {
               {{ errorMessagePassword }}
             </div>
           </div>
+
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Se connecter</button>
           </div>
+          
           <div class="no-register">
             <p>
               Vous n'avez pas de compte ?
-              <router-link to="./Register"
-                ><strong>S'inscrire.</strong></router-link
-              >
+              <router-link to="./register">
+                <strong>S'inscrire.</strong>
+              </router-link>
             </p>
           </div>
         </form>

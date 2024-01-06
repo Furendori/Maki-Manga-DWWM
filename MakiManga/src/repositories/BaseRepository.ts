@@ -18,16 +18,10 @@ export abstract class BaseRepository {
             }
 
             let response: Response = await fetch(this.host + path, options);
-            // const contentType = response.headers.get('Content-Type');
-
-            // if (contentType && contentType.includes('application/json')) {
-            //     return await response.json();
-            // } else {
-            //     return null
-            // }
+    
             return await response.json();
-        } catch (e) {
-            console.log('Erreur dans la base repo',e);
+        } catch (error) {
+            console.log('Erreur dans la base repo',error);
         }
     }
 }

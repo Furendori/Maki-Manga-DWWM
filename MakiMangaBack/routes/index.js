@@ -5,67 +5,35 @@ const SendEmailController = require("../controller/sendEmail");
 
 module.exports = server => {
     
-    server.get("/users", (req, res) => {
-        UserController.getAll(req, res);
-    });
+    server.get("/users", UserController.getAll);
 
-    server.get("/user/:id", (req, res) => {
-        UserController.get(req,res);
-    });
+    server.get("/user/:id", UserController.get);
 
-    server.get("/products", (req, res) => {
-        ProductController.getAll(req, res);
-    });
+    server.get("/products", ProductController.getAll);
     
-    server.get("/mangas", (req, res) => {
-        MangaController.getAll(req, res);
-    });
+    server.get("/mangas", MangaController.getAll);
 
-    server.get("/product/:id", (req, res) => {
-        ProductController.get(req, res);
-    });
+    server.get("/product/:id", ProductController.get);
 
-    server.get("/manga/:id", (req, res) => {
-        MangaController.get(req, res);
-    });
+    server.get("/manga/:id", MangaController.get);
 
-    server.post("/users", (req, res) => {
-        UserController.create(req, res);
-    });
+    server.post("/users", UserController.create);
 
-    server.get("/users/:email", (req, res) => {
-        UserController.findByEmail(req, res);
-    });
+    server.get("/users/:email", UserController.findByEmail);
 
-    server.post("/users/:id", (req, res) => {
-        UserController.update(req, res);
-    })
+    server.post("/users/:id", UserController.update);
 
-    server.post("/products", (req, res) => {
-        ProductController.create(req, res);
-    });
+    server.post("/products", ProductController.create);
 
-    server.post("/mangas", (req, res) => {
-        MangaController.create(req, res);
-    });
+    server.post("/mangas",MangaController.create);
 
-    server.post("/send_email", (req, res) => {
-        SendEmailController.sendEmail(req, res);
-    });
+    server.post("/send_email", SendEmailController.sendEmail);
 
-    server.delete("/users/:id", (req, res) => {
-        UserController.delete(req, res);
-    });
+    server.delete("/users/:id", UserController.delete);
 
-    server.delete("/products/:id", (req, res) => {
-        ProductController.delete(req, res);
-    });
+    server.delete("/products/:id", ProductController.delete);
 
-    server.get("/search", (req, res) => {
-        ProductController.searchProducts(req, res);
-    });
+    server.get("/search", ProductController.searchProducts);
 
-    server.delete("/mangas/:id", (req, res) => {
-        MangaController.delete(req, res);
-    });
+    server.delete("/mangas/:id", MangaController.delete);
 }
