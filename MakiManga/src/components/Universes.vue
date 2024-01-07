@@ -19,6 +19,7 @@ h3 {
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
 
         img {
             height: 125px;

@@ -9,7 +9,10 @@ module.exports = server => {
     
     server.get("/users", AuthMiddleware.auth, UserController.getAll);
 
+    //admin
     server.get("/user/:id", AuthMiddleware.auth, UserController.get);
+    //self User
+    server.get("/user", AuthMiddleware.auth, UserController.get);
 
     server.get("/products", ProductController.getAll);
     
@@ -19,25 +22,28 @@ module.exports = server => {
 
     server.get("/manga/:id", MangaController.get);
 
-    server.post("/users", UserController.create);
+    server.post("/user", UserController.create);
 
-    server.get("/users/:email", UserController.findByEmail);
+    server.patch("/user", AuthMiddleware.auth, UserController.update);
 
-    server.patch("/users/:id", UserController.update);
+    server.patch("/manga/:id", MangaController.update);
 
-    server.post("/products", ProductController.create);
+    server.post("/product", AuthMiddleware.auth, ProductController.create);
 
-    server.post("/mangas",MangaController.create);
+    server.post("/manga", MangaController.create);
+    
+    server.post("/login", LoginController.signIn);
 
-    server.post("/send_email", AuthMiddleware.auth, SendEmailController.sendEmail);
+    server.post("/send_email", SendEmailController.sendEmail);
 
-    server.delete("/users/:id", UserController.delete);
+    // admin
+    server.delete("/user/:id", AuthMiddleware.auth, UserController.delete);
+    // Self User
+    server.delete("/user", AuthMiddleware.auth, UserController.delete);
 
-    server.delete("/products/:id", ProductController.delete);
+    server.delete("/product/:id", AuthMiddleware.auth, ProductController.delete);
 
     server.get("/search", ProductController.searchProducts);
 
-    server.delete("/mangas/:id", MangaController.delete);
-
-    server.post("/login", LoginController.signIn);
+    server.delete("/manga/:id", MangaController.delete);
 }

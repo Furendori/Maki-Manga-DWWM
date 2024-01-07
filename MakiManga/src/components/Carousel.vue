@@ -25,19 +25,39 @@ import Button from './Button.vue';
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .container-carousel {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  height: 80%;
-  width: 900px;
+  width: 60%;
+  height: 70%;
   background-color: $primary-color;
   border-radius: 15px;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 25px;
+
+  @media screen and (max-width: 1401px) {
+      .container-carousel {
+        width: 50%;
+      }
+  }
+
+  // @media screen and (max-width: 1370px) {
+  //     .container-carousel {
+  //       height: 300px;
+  //     }
+  // }
+
+  // @media screen and (max-width: 768px) {
+  //   .container-carousel {
+  //     height: 300px;
+
+  //     .container-img {
+  //       img {
+  //         height: 20%;
+  //       }
+  //     }
+  //   }
+  // }
 
   .container-img {
     display: flex;
@@ -45,7 +65,7 @@ import Button from './Button.vue';
     height: 100%;
 
     img {
-      height: 500px;
+      height: 50vh;
       object-fit: cover;
     }
   }

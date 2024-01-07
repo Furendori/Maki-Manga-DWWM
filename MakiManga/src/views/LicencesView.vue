@@ -37,6 +37,8 @@ onMounted(() => {
 .main-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  
   .manga-card {
     display: flex;
     flex-direction: column;

@@ -1,13 +1,13 @@
-require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const routes = require("./routes/index");
-
 const server = express();
 const corsOptions = {
     origin: "http://localhost:5173"
 };
+
+require("dotenv").config();
 
 server.use(express.json());
 server.use(cors(corsOptions));

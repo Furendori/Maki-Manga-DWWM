@@ -48,5 +48,22 @@ onMounted(() => {
             justify-content: center;
             flex-wrap: wrap;
         }
+
+        @media screen and (max-width: 1500px) {
+
+            .container-products {
+                width: 90%;
+                margin-left: 20px;
+            }
+        }
+
+        @media screen and (min-width: 1270px) {
+
+            .container-products {
+                width: 1100px;
+                display: flex;
+                align-self: center;
+            }
+        }
     }
 </style>

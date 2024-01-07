@@ -70,7 +70,7 @@ export default {
 
 
 <template>
-  <div id="app">
+  <div>
     <div class="checkout-container">
 
       <div class="adresse-container">
@@ -100,12 +100,13 @@ export default {
           <label for="phone">Téléphone (optionnel)</label>
           <input type="text" id="phone" v-model="phone" placeholder="Votre téléphone...">
         </div>
-        
-         <div class="paiement-container">
+
+        <div class="paiement-container">
           <h2>Carte de crédit</h2>
           <div class="paiement-details">
             <label for="cardNumber">Numéro de carte :</label>
-            <input type="text" id="cardNumber" v-model="paymentInfo.cardNumber" required placeholder="**** **** **** ****">
+            <input type="text" id="cardNumber" v-model="paymentInfo.cardNumber" required
+              placeholder="**** **** **** ****">
 
             <label for="expiryDate">Date d'expiration :</label>
             <input type="text" id="expiryDate" v-model="paymentInfo.expiryDate" placeholder="MM/YYYY" required>
@@ -114,17 +115,17 @@ export default {
             <input type="text" id="ccv" v-model="paymentInfo.ccv" required placeholder="***">
           </div>
 
-         
+
         </div>
-          <button type="submit" @click="processPayment">Valider</button>
-          <h5>Paiement sécurisé</h5>
-          <img src="../assets/img/logo-cart.png" alt="" width="150">
+        <button type="submit" @click="processPayment">Valider</button>
+        <h5>Paiement sécurisé</h5>
+        <img src="../assets/img/logo-cart.png" alt="" width="150">
       </div>
 
       <!-- separateur -->
-              <div class="separateur"></div>
+      <div class="separateur"></div>
 
-              <div class="cart-container">
+      <div class="cart-container">
         <h2>Votre Panier</h2>
         <ul>
           <li v-for="(item, index) in cartItems" :key="index">
@@ -144,9 +145,9 @@ export default {
           <button @click="applyPromoCode">Appliquer</button>
         </div>
       </div>
-        </div>
-        <h4>Merci de votre confiance.</h4>
-        </div>
+    </div>
+    <h4>Merci de votre confiance.</h4>
+  </div>
 </template>
 
 <style scoped>
@@ -165,6 +166,7 @@ export default {
 h1 {
   margin: 0;
 }
+
 .adresse-container {
   width: 60%;
 }
@@ -194,6 +196,7 @@ h1 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .paiement-details {
   margin: 0 auto;
   width: 75%;
@@ -237,11 +240,13 @@ button {
   height: 50px;
   border-radius: 10px;
 }
+
 .cart-paiement-container {
   display: flex;
   flex-direction: column;
-  justify-content:right;
+  justify-content: right;
 }
+
 .checkout-container {
   background: rgb(255, 255, 255);
   border-radius: 5px;
@@ -261,19 +266,19 @@ button {
   .adresse-container,
   .cart-paiement-container,
   .cart-container,
-    .paiement-container {
+  .paiement-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .separateur {
     width: 100%;
     margin: 20px 0;
   }
-}
-</style>
+}</style>
 
 
 

@@ -15,30 +15,26 @@ module.exports = {
     },
 
     create(req, res) {
-        const manga = new MangaModel({...req.body});
+        const manga = new MangaModel(req.body);
         manga.save().then(() => {
             res.send({
-                response: `Création du manga ${manga.name} effectué avec succès`
+                response: `Création du manga ${manga.nameFR} effectué avec succès`
             });
-        }).catch((error) => console.log(error.toString()));
+        });
     },
 
     update(req, res) {
-        const id = req.body._id;
-        if(id) {
-            MangaModel.findByIdAndUpdate(id, req.body).then(manga => {
-                res.send(`Mise à jour du manga ${manga.name}`)
-            });
-        } else {
-            res.send({ result: "Un id est nécessaire pour mettre à jour le manga"})
-        }
+        const id = req.params.id;
+        MangaModel.findByIdAndUpdate({ _id: id,}, req.body).then(manga => {
+            res.send(`Mise à jour du manga ${manga.nameFR}`)
+        });
     },
 
     delete(req, res) {
         const id = req.params.id;
-        MangaModel.findByIdAndRemove(id).then(manga => {
+        MangaModel.findByIdAndDelete({ _id: id }).then(manga => {
             res.send({
-                response: `Suppression du manga ${manga.name} a bien été supprimé`
+                response: `Suppression du manga ${manga.nameFR} a bien été supprimé`
             });
         });
     }

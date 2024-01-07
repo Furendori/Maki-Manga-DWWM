@@ -27,6 +27,7 @@ const getProducts = async () => {
 onMounted(() => {
     getProducts();
  });
+
 </script>
 
 <template>
@@ -55,7 +56,7 @@ onMounted(() => {
         </div>
     </div>
 
-    <Universes class="universes" />
+    <Universes class="universes"/>
 </div>
 </template>
 
@@ -85,6 +86,24 @@ onMounted(() => {
             right: 0;
             z-index: 1;
             height: 500px;
+        }
+
+        @media screen and (max-width: 1500px) {
+            .image1, .image2 {
+                height: 400px;
+            }
+        }
+
+        @media screen and (max-width: 1370px) {
+            .image1, .image2 {
+                height: 300px;
+            }
+        }
+
+        @media screen and (max-width: 704px) {
+            .image1, .image2 {
+                display: none;
+            }
         }
     }
     .container-products {

@@ -10,10 +10,10 @@ export class ProductRepository extends BaseRepository {
     }
     
     createProduct = async (body?: {}) => {
-        return await this.request(`/products`, 'POST', body);
+        return await this.request(`/product`, 'POST', body);
     }
     
     deleteProduct = async (id: string) => {
-        return await this.request(`/products/${id}`, 'DELETE');
+        return await this.request(`/product/${id}`, 'DELETE');
     }
 }

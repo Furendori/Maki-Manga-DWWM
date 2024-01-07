@@ -5,12 +5,9 @@ import { LoginRepository } from "../repositories/LoginRepository";
 
 const repo: LoginRepository = new LoginRepository();
 
-let userEmail = ref("");
-let userPassword = ref("");
-let errorMessage = ref("");
-let errorMessageMail = "";
-let errorMessagePassword = "";
-let loggedUser = ref();
+const userEmail = ref("");
+const userPassword = ref("");
+const errorMessage = ref("");
 
 // let login = async () => {
 //   try {
@@ -57,19 +54,21 @@ const login = async () => {
   }
 
   try {
-    await repo.login({email: userEmail.value, password: userPassword.value});
+    await repo.login({ email: userEmail.value, password: userPassword.value });
+
   } catch (error) {
+
     if (error instanceof Error) {
-     errorMessage.value = error.message;
+      errorMessage.value = error.message;
     } else {
-     errorMessage.value = "Une erreur est survenue, réessayez plus tard";
+      errorMessage.value = "Une erreur est survenue, réessayez plus tard";
     }
   }
 }
 </script>
 
 <template>
-  <div id="app">
+  <div>
     <div class="login-container">
       <div class="cloud">
         <div id="stars"></div>
@@ -85,30 +84,15 @@ const login = async () => {
         <form @submit.prevent="login">
           <div class="form-group">
             <label for="email">E-mail *</label>
-            <input
-              type="email"
-              id="email"
-              v-model="userEmail"
-              class="form-control"
-              required
-              placeholder="Votre e-mail..."
-            />
-          </div>
-          <div class="errorMail">
-              {{ errorMessageMail }}
+            <input type="email" id="email" v-model="userEmail" class="form-control" required
+              placeholder="Votre e-mail..." />
           </div>
 
           <div class="form-group">
             <label for="password">Mot de passe *</label>
-            <input
-              type="password"
-              id="password"
-              v-model="userPassword"
-              class="form-control"
-              required
-              placeholder="Votre mot de passe..."
-            />
-            <div class="errorPassword">
+            <input type="password" id="password" v-model="userPassword" class="form-control" required
+              placeholder="Votre mot de passe..." />
+            <div class="errorsMessages">
               {{ errorMessage }}
             </div>
           </div>
@@ -116,7 +100,7 @@ const login = async () => {
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Se connecter</button>
           </div>
-          
+
           <div class="no-register">
             <p>
               Vous n'avez pas de compte ?
@@ -132,7 +116,6 @@ const login = async () => {
 </template>
 
 <style scoped>
-
 div.login {
   width: 900px;
   position: absolute;
@@ -237,7 +220,7 @@ input[type="checkbox"] {
 }
 
 /* RESPONSIVE */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 936px) {
   div.login {
     width: 90%;
     margin-top: 0;
@@ -446,6 +429,7 @@ div.login-container {
     659px 1860px #fff, 388px 1412px #fff, 1212px 458px #fff, 755px 1468px #fff,
     696px 1654px #fff, 1144px 60px #fff;
 }
+
 #stars:after {
   content: "";
   position: absolute;
@@ -631,6 +615,7 @@ div.login-container {
     659px 1860px #fff, 388px 1412px #fff, 1212px 458px #fff, 755px 1468px #fff,
     696px 1654px #fff, 1144px 60px #fff;
 }
+
 #stars2 {
   width: 2px;
   height: 2px;
@@ -688,6 +673,7 @@ div.login-container {
     156px 81px #fff, 1915px 502px #fff, 1076px 1846px #fff, 152px 1669px #fff,
     986px 1529px #fff, 1667px 1137px #fff;
 }
+
 #stars2:after {
   content: "";
   position: absolute;
@@ -747,6 +733,7 @@ div.login-container {
     156px 81px #fff, 1915px 502px #fff, 1076px 1846px #fff, 152px 1669px #fff,
     986px 1529px #fff, 1667px 1137px #fff;
 }
+
 #stars3 {
   width: 3px;
   height: 3px;
@@ -779,6 +766,7 @@ div.login-container {
     494px 1957px #fff, 1296px 431px #fff, 175px 1507px #fff, 831px 121px #fff,
     498px 1947px #fff, 617px 880px #fff, 240px 403px #fff;
 }
+
 #stars3:after {
   content: "";
   position: absolute;
@@ -813,11 +801,13 @@ div.login-container {
     494px 1957px #fff, 1296px 431px #fff, 175px 1507px #fff, 831px 121px #fff,
     498px 1947px #fff, 617px 880px #fff, 240px 403px #fff;
 }
+
 /* ---- Star Animation ---- */
 @keyframes animStar {
   from {
     transform: translateY(0px);
   }
+
   to {
     transform: translateY(-2000px);
   }

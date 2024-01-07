@@ -1,29 +1,29 @@
-<script setup>
+<script setup lang="ts">
 
 // animation de la barre de recherche
-function setSearch(oEvent){
-  console.log(oEvent); 
-  oEvent.preventDefault();
-  var sType = oEvent.type,
-      sClass =  "search",
-      oSearch = oEvent.currentTarget,
-      oForm  =  oSearch.form; 
-  if((sType == 'focus' || sType == 'click') && !oForm.classList.contains(sClass)){
-    oForm.classList.add(sClass)
-  }else if(sType == 'blur' && oSearch.value.trim() == ''){
-    oForm.classList.remove(sClass)
-  }
-}
+// function setSearch(oEvent){
+//   console.log(oEvent); 
+//   oEvent.preventDefault();
+//   var sType = oEvent.type,
+//       sClass =  "search",
+//       oSearch = oEvent.currentTarget,
+//       oForm  =  oSearch.form; 
+//   if((sType == 'focus' || sType == 'click') && !oForm.classList.contains(sClass)){
+//     oForm.classList.add(sClass)
+//   }else if(sType == 'blur' && oSearch.value.trim() == ''){
+//     oForm.classList.remove(sClass)
+//   }
+// }
 
-document.addEventListener('DOMContentLoaded',function(){
-  var oInput = document.forms["form-search"]["search"];
-  oInput.addEventListener('focus',setSearch)
-  oInput.addEventListener('blur',setSearch);
+// document.addEventListener('DOMContentLoaded',function(){
+//   var oInput = document.forms["form-search"]["search"];
+//   oInput.addEventListener('focus',setSearch)
+//   oInput.addEventListener('blur',setSearch);
   
-  document.getElementById("bt-search").addEventListener('click', function(oEvent){
-    oEvent.preventDefault();oInput.focus() ;
-  });
-});
+//   document.getElementById("bt-search").addEventListener('click', function(oEvent){
+//     oEvent.preventDefault();oInput.focus() ;
+//   });
+// });
 </script>
 
 <template>
@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded',function(){
 <style scoped lang="scss">
 .top-nav {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: $primary-color;

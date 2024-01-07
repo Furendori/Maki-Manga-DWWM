@@ -10,14 +10,14 @@ export class UserRepository extends BaseRepository {
   };
 
   createUser = async (body?: {}) => {
-    return await this.request(`/users`, "POST", body);
+    return await this.request(`/user`, "POST", body);
   };
 
   deleteUser = async (id: number) => {
-    return await this.request(`/users/${id}`, "DELETE");
+    return await this.request(`/user`, "DELETE");
   };
 
   updateUser = async (id: number, data: {}) => {
-    return await this.request(`/users/${id}`, "PATCH", data);
+    return await this.request(`/user`, "PATCH", data);
   };
 }

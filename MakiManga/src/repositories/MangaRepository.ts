@@ -6,14 +6,14 @@ export class MangaRepository extends BaseRepository {
     }
     
     getManga = async (id: string) => {
-        return await this.request(`/mangas/${id}`);
+        return await this.request(`/manga/${id}`);
     }
     
     createManga = async (body?: {}) => {
-        return await this.request(`/mangas`, 'POST', body);
+        return await this.request(`/manga`, 'POST', body);
     }
     
     deleteManga = async (id: number) => {
-        return await this.request(`/mangas/${id}`, 'DELETE');
+        return await this.request(`/manga/${id}`, 'DELETE');
     }
 }

@@ -9,7 +9,7 @@ module.exports = {
     },
 
     get(req, res) {
-        const id = req.params.id;
+        const id = req.params?.id ?? req.user._id;
         UserModel.findById(id).then(user => {
             res.send(user);
         });
@@ -63,7 +63,7 @@ module.exports = {
     },
 
     update(req, res) {
-        const id = req.body._id;
+        const id = req.user._id;
         if(id) {
             UserModel.findByIdAndUpdate(id, req.body).then(user => {
                 res.send(`Mise à jour du compte ${user.firstName}`)
@@ -74,7 +74,7 @@ module.exports = {
     },
 
     delete(req, res) {
-        const id = req.params.id;
+        const id = req.params?.id ?? req.user._id;
         UserModel.findById(id).then(user => {
             res.delete(user);
         });
